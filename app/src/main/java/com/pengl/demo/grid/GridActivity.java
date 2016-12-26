@@ -13,14 +13,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.RecyclerView;
+import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class GridActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.recycler)
-    RecyclerView mRecycler;
+    PLRecyclerView mRecycler;
     @BindView(R.id.content_grid)
     RelativeLayout mContentGrid;
     @BindView(R.id.fab)
@@ -41,14 +41,14 @@ public class GridActivity extends AppCompatActivity {
         mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
         mRecycler.setAdapterWithLoading(mAdapter);
 
-        mRecycler.setRefreshListener(new RecyclerView.OnRefreshListener() {
+        mRecycler.setRefreshListener(new PLRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mPresenter.loadData(true);
             }
         });
 
-        mRecycler.setLoadMoreListener(new RecyclerView.OnLoadMoreListener() {
+        mRecycler.setLoadMoreListener(new PLRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mPresenter.loadData(false);

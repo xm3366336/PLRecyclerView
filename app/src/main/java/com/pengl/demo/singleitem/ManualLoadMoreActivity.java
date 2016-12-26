@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
 import com.pengl.PLRecyclerView.ConfigureAdapter;
-import com.pengl.PLRecyclerView.RecyclerView;
+import com.pengl.PLRecyclerView.PLRecyclerView;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -25,7 +25,7 @@ import com.pengl.PLRecyclerView.RecyclerView;
 public class ManualLoadMoreActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler)
-    RecyclerView mRecycler;
+    PLRecyclerView mRecycler;
 
     private SingleItemAdapter mAdapter;
     private SingleItemPresenter mPresenter;
@@ -90,13 +90,13 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
-        mRecycler.setRefreshListener(new RecyclerView.OnRefreshListener() {
+        mRecycler.setRefreshListener(new PLRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mPresenter.loadData(true);
             }
         });
-        mRecycler.setLoadMoreListener(new RecyclerView.OnLoadMoreListener() {
+        mRecycler.setLoadMoreListener(new PLRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mPresenter.loadData(false);

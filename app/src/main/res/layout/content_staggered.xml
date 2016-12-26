@@ -10,10 +10,10 @@
     tools:context="com.pengl.demo.staggered.StaggeredActivity"
     tools:showIn="@layout/activity_staggered">
 
-    <com.pengl.PLRecyclerView.RecyclerView
+    <com.pengl.PLRecyclerView.PLRecyclerView
         android:id="@id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.pengl.PLRecyclerView.RecyclerView>
+    </com.pengl.PLRecyclerView.PLRecyclerView>
 </RelativeLayout>

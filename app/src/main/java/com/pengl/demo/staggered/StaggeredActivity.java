@@ -14,14 +14,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.RecyclerView;
+import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class StaggeredActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.recycler)
-    RecyclerView mRecycler;
+    PLRecyclerView mRecycler;
     @BindView(R.id.content_staggered)
     RelativeLayout mContentStaggered;
     @BindView(R.id.fab)
@@ -45,14 +45,14 @@ public class StaggeredActivity extends AppCompatActivity {
         mRecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         mRecycler.setAdapterWithLoading(mAdapter);
 
-        mRecycler.setRefreshListener(new RecyclerView.OnRefreshListener() {
+        mRecycler.setRefreshListener(new PLRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mPresenter.loadData(true);
             }
         });
 
-        mRecycler.setLoadMoreListener(new RecyclerView.OnLoadMoreListener() {
+        mRecycler.setLoadMoreListener(new PLRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mPresenter.loadData(false);

@@ -11,7 +11,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.RecyclerView;
+import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton mFab;
     @BindView(R.id.recycler)
-    RecyclerView mRecycler;
+    PLRecyclerView mRecycler;
 
     private MainAdapter mAdapter;
     private MainPresenter mPresenter;

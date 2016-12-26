@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
@@ -25,7 +26,7 @@ import java.util.Observer;
  * Time: 13:56
  * FIXME
  */
-public class RecyclerView extends FrameLayout {
+public class PLRecyclerView extends FrameLayout {
 
     private boolean mAutoLoadMoreEnabled = true;
     private boolean mNoMoreViewEnabled = true;
@@ -60,15 +61,15 @@ public class RecyclerView extends FrameLayout {
     private OnScrollListener mScrollListener = new OnScrollListener();
     private DataSetObserver mObserver = new DataSetObserver();
 
-    public RecyclerView(Context context) {
+    public PLRecyclerView(Context context) {
         this(context, null);
     }
 
-    public RecyclerView(Context context, AttributeSet attrs) {
+    public PLRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PLRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initMainView(context);
         obtainStyledAttributes(context, attrs);
@@ -76,7 +77,7 @@ public class RecyclerView extends FrameLayout {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RecyclerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PLRecyclerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initMainView(context);
         obtainStyledAttributes(context, attrs);
@@ -390,14 +391,14 @@ public class RecyclerView extends FrameLayout {
     }
 
     private void obtainStyledAttributes(Context context, AttributeSet attrs) {
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.RecyclerView);
-        int loadingResId = attributes.getResourceId(R.styleable.RecyclerView_loading_layout, R.layout.default_loading_layout);
-        int emptyResId = attributes.getResourceId(R.styleable.RecyclerView_empty_layout, R.layout.default_empty_layout);
-        int errorResId = attributes.getResourceId(R.styleable.RecyclerView_error_layout, R.layout.default_error_layout);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PLRecyclerView);
+        int loadingResId = attributes.getResourceId(R.styleable.PLRecyclerView_loading_layout, R.layout.default_loading_layout);
+        int emptyResId = attributes.getResourceId(R.styleable.PLRecyclerView_empty_layout, R.layout.default_empty_layout);
+        int errorResId = attributes.getResourceId(R.styleable.PLRecyclerView_error_layout, R.layout.default_error_layout);
 
-        int loadMoreResId = attributes.getResourceId(R.styleable.RecyclerView_load_more_layout, R.layout.default_load_more_layout);
-        int noMoreResId = attributes.getResourceId(R.styleable.RecyclerView_no_more_layout, R.layout.default_no_more_layout);
-        int loadMoreErrorResId = attributes.getResourceId(R.styleable.RecyclerView_load_more_failed_layout, R.layout.default_load_more_failed_layout);
+        int loadMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_load_more_layout, R.layout.default_load_more_layout);
+        int noMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_no_more_layout, R.layout.default_no_more_layout);
+        int loadMoreErrorResId = attributes.getResourceId(R.styleable.PLRecyclerView_load_more_failed_layout, R.layout.default_load_more_failed_layout);
 
         mLoadingView = LayoutInflater.from(context).inflate(loadingResId, mLoadingContainer, true);
         mEmptyView = LayoutInflater.from(context).inflate(emptyResId, mEmptyContainer, true);
@@ -429,7 +430,7 @@ public class RecyclerView extends FrameLayout {
             closeRefreshing();
             closeLoadingMore();
             Bridge type = (Bridge) arg;
-            type.doSomething(RecyclerView.this);
+            type.doSomething(PLRecyclerView.this);
         }
     }
 
