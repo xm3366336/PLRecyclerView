@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.pengl.demo">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.pengl.library.PLRecyclerview.season.demo.main.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.pengl.library.PLRecyclerview.season.demo.singleitem.SingleItemActivity">
+        </activity>
+        <activity
+            android:name="com.pengl.library.PLRecyclerview.season.demo.grid.GridActivity"
+            android:label="@string/title_activity_grid"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.pengl.library.PLRecyclerview.season.demo.multipleitem.MultiItemActivity"
+            android:label="@string/title_activity_multi_item"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.pengl.library.PLRecyclerview.season.demo.staggered.StaggeredActivity"
+            android:label="@string/title_activity_staggered"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.pengl.library.PLRecyclerview.season.demo.singleitem.ManualLoadMoreActivity"
+            android:label="@string/ManualLoadMoreActivity"/>
+    </application>
+
+</manifest>
