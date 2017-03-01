@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.pengl.library.PLRecyclerview.season.demo.main.MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,26 +20,36 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.pengl.library.PLRecyclerview.season.demo.singleitem.SingleItemActivity">
+        <activity android:name=".singleitem.SingleItemActivity">
         </activity>
         <activity
-            android:name="com.pengl.library.PLRecyclerview.season.demo.grid.GridActivity"
+            android:name=".grid.GridActivity"
             android:label="@string/title_activity_grid"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.pengl.library.PLRecyclerview.season.demo.multipleitem.MultiItemActivity"
+            android:name=".multipleitem.MultiItemActivity"
             android:label="@string/title_activity_multi_item"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.pengl.library.PLRecyclerview.season.demo.staggered.StaggeredActivity"
+            android:name=".staggered.StaggeredActivity"
             android:label="@string/title_activity_staggered"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.pengl.library.PLRecyclerview.season.demo.singleitem.ManualLoadMoreActivity"
+            android:name=".singleitem.ManualLoadMoreActivity"
             android:label="@string/ManualLoadMoreActivity"/>
+        <activity
+            android:name=".drag.DragActivity"
+            android:label="@string/title_activity_item_drag"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".expand.ExpandActivity"
+            android:label="@string/title_activity_expand"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

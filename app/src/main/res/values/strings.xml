@@ -8,7 +8,82 @@
         <item>Grid</item>
         <item>瀑布流</item>
         <item>手动触发加载更多</item>
+        <item>拖拽</item>
+        <item>ExpandItemList</item>
     </string-array>
+
+    <string name="mock_empty_response">
+{
+   "data":[
+        {
+        "text": 0,
+        "child": [
+            {"text": 0},
+            {"text": 1}
+        ]
+        },
+    {
+        "text": 1,
+        "child": [
+            {"text": 0},
+            {"text": 1}
+
+
+        ]
+    }
+   ]
+}
+    </string>
+
+    <string name="mock_response">
+{"data": [
+    {
+        "text": 0,
+        "child": [
+            {"text": 0},
+            {"text": 1},
+            {"text": 2},
+            {"text": 3}
+        ]
+    },
+    {
+        "text": 1,
+        "child": [
+            {"text": 0},
+            {"text": 1},
+            {"text": 2},
+            {"text": 3}
+        ]
+    },
+    {
+        "text": 2,
+        "child": [
+            {"text": 0},
+            {"text": 1},
+            {"text": 2},
+            {"text": 3}
+        ]
+    },
+    {
+        "text": 3,
+        "child": [
+            {"text": 0},
+            {"text": 1},
+            {"text": 2},
+            {"text": 3}
+        ]
+    },
+    {
+        "text": 4,
+        "child": [
+            {"text": 0},
+            {"text": 1},
+            {"text": 2},
+            {"text": 3}
+        ]
+    }
+]}
+    </string>
 
     <string-array name="image">
         <item>http://pic4.zhimg.com/d672dba4d597876c6ad33427780f6a37_m.jpg</item>
@@ -106,5 +181,10 @@
     <string name="action_load_more_failed_enable">关闭LoadMoreFailedView</string>
     <string name="action_auto_load_enable">开启自动加载</string>
     <string name="click_to_load">点击加载下一页</string>
+    <string name="title_activity_item_drag">ItemDragActivity</string>
+    <string name="aa">aa</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_grid">表格</string>
+    <string name="title_activity_expand">ExpandActivity</string>
 
 </resources>

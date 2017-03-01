@@ -11,6 +11,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.pengl.demo.R;
+import com.pengl.demo.drag.DragActivity;
+import com.pengl.demo.expand.ExpandActivity;
 import com.pengl.demo.grid.GridActivity;
 import com.pengl.demo.multipleitem.MultiItemActivity;
 import com.pengl.demo.singleitem.ManualLoadMoreActivity;
@@ -57,6 +59,13 @@ class MenuViewHolder extends AbstractViewHolder<MenuBean> {
                 break;
             case 4:
                 mContext.startActivity(new Intent(mContext, ManualLoadMoreActivity.class));
+                break;
+            case 5:
+                mContext.startActivity(new Intent(mContext, DragActivity.class));
+                break;
+            case 6:
+                mContext.startActivity(new Intent(mContext, ExpandActivity.class));
+                break;
         }
 
     }
