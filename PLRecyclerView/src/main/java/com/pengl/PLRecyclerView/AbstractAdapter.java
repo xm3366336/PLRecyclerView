@@ -221,6 +221,15 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
+     * 清除当前所有数据，并显示Empty
+     */
+    public void showEmpty() {
+        dataSet.clear();
+        notifyDataSetChanged();
+        dataSet.notifyEmpty();
+    }
+
+    /**
      * 清除当前所有数据,并显示ErrorView
      */
     public void showError() {
