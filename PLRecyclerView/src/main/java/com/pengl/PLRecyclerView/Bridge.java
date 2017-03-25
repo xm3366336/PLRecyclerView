@@ -35,9 +35,19 @@ interface Bridge {
 
     class Error implements Bridge {
 
+        private String err = null;
+
+        public Error() {
+            super();
+        }
+
+        public Error(String err) {
+            this.err = err;
+        }
+
         @Override
         public void doSomething(PLRecyclerView host) {
-            host.displayErrorAndResetStatus();
+            host.displayErrorAndResetStatus(err);
         }
     }
 

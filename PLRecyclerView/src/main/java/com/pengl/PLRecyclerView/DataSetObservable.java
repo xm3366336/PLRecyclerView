@@ -66,6 +66,11 @@ class DataSetObservable<E> extends Observable {
         super.notifyObservers(new Bridge.Error());
     }
 
+    void notifyError(String error) {
+        super.setChanged();
+        super.notifyObservers(new Bridge.Error(error));
+    }
+
     void notifyEmpty() {
         super.setChanged();
         super.notifyObservers(new Bridge.Empty());

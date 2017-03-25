@@ -239,6 +239,17 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
+     * 清除当前所有数据,并显示ErrorView
+     *
+     * @param error 显示具体的错误原因
+     */
+    public void showError(String error) {
+        dataSet.clear();
+        notifyDataSetChanged();
+        dataSet.notifyError(error);
+    }
+
+    /**
      * 显示底部LoadMoreErrorView
      */
     public void loadMoreFailed() {

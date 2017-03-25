@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.R;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 

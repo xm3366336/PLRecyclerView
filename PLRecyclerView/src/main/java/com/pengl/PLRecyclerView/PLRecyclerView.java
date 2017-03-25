@@ -10,11 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -256,10 +258,20 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     void displayErrorAndResetStatus() {
+        displayErrorAndResetStatus(null);
+    }
+
+    void displayErrorAndResetStatus(String error) {
         mLoadingContainer.setVisibility(GONE);
         mContentContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(VISIBLE);
+        if (!TextUtils.isEmpty(error) && null != mErrorView) {
+            TextView tv = (TextView) mErrorView.findViewById(R.id.tv_content);
+            if (null != tv) {
+                tv.setText(error);
+            }
+        }
         resetStatus();
     }
 
@@ -455,8 +467,7 @@ public class PLRecyclerView extends FrameLayout {
             int totalItemCount = layoutManager.getItemCount();
             int lastVisibleItemPosition = getLastVisibleItemPosition(layoutManager);
 
-            return visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 1 &&
-                    totalItemCount >= visibleItemCount;
+            return visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 1 && totalItemCount >= visibleItemCount;
         }
 
         private int getLastVisibleItemPosition(RecyclerView.LayoutManager layoutManager) {
