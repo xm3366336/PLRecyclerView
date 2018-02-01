@@ -12,11 +12,11 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:loading_layout="@layout/default_loading_layout"
-        app:empty_layout="@layout/default_empty_layout"
-        app:error_layout="@layout/default_error_layout"
-        app:load_more_layout="@layout/default_load_more_layout"
-        app:no_more_layout="@layout/default_no_more_layout"
-        app:load_more_failed_layout="@layout/default_load_more_failed_layout"/>
+        app:pl_rv_loading_layout="@layout/pl_rv_loading_layout"
+        app:pl_rv_empty_layout="@layout/pl_rv_empty_layout"
+        app:pl_rv_error_layout="@layout/pl_rv_error_layout"
+        app:pl_rv_load_more_layout="@layout/pl_rv_load_more_layout"
+        app:pl_rv_no_more_layout="@layout/pl_rv_no_more_layout"
+        app:pl_rv_load_more_failed_layout="@layout/pl_rv_load_more_failed_layout"/>
 
 </RelativeLayout>

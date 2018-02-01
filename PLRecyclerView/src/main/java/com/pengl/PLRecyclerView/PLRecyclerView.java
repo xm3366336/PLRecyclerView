@@ -98,6 +98,20 @@ public class PLRecyclerView extends FrameLayout {
         configure.configureLoadMoreFailedView(mLoadMoreFailedView);
     }
 
+    public void configureEmptyView(ConfigureEmpty configure) {
+        if (configure == null) {
+            return;
+        }
+        configure.configureEmptyView(mEmptyView);
+    }
+
+    public void configureErrorView(ConfigureError configure) {
+        if (configure == null) {
+            return;
+        }
+        configure.configureErrorView(mErrorView);
+    }
+
     public RecyclerView get() {
         return mRecyclerView;
     }
@@ -249,29 +263,45 @@ public class PLRecyclerView extends FrameLayout {
         resetStatus();
     }
 
-    void displayEmptyAndResetStatus() {
+    void displayEmptyAndResetStatus(int resId, String content) {
         mLoadingContainer.setVisibility(GONE);
         mContentContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(VISIBLE);
+
+        TextView tv = (TextView) mEmptyView.findViewById(R.id.tv_content);
+        if (null != mEmptyView && null != tv) {
+            if (!TextUtils.isEmpty(content)) {
+                tv.setText(content);
+            } else {
+                tv.setText(getResources().getString(R.string.pl_rv_empty));
+            }
+            if (resId != 0) {
+                tv.setCompoundDrawablesWithIntrinsicBounds(0, resId, 0, 0);
+            }
+        }
+
         resetStatus();
     }
 
-    void displayErrorAndResetStatus() {
-        displayErrorAndResetStatus(null);
-    }
-
-    void displayErrorAndResetStatus(String error) {
+    void displayErrorAndResetStatus(int resId, String error) {
         mLoadingContainer.setVisibility(GONE);
         mContentContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(VISIBLE);
-        if (!TextUtils.isEmpty(error) && null != mErrorView) {
-            TextView tv = (TextView) mErrorView.findViewById(R.id.tv_content);
-            if (null != tv) {
+
+        TextView tv = (TextView) mErrorView.findViewById(R.id.tv_content);
+        if (null != mErrorView && null != tv) {
+            if (!TextUtils.isEmpty(error)) {
                 tv.setText(error);
+            } else {
+                tv.setText(getResources().getString(R.string.pl_rv_error));
+            }
+            if (resId != 0) {
+                tv.setCompoundDrawablesWithIntrinsicBounds(0, resId, 0, 0);
             }
         }
+
         resetStatus();
     }
 
@@ -335,7 +365,7 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     private void initMainView(Context context) {
-        mMainContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.recycler_layout, this, true);
+        mMainContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.pl_rv_layout, this, true);
         mLoadingContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_loading);
         mErrorContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_error);
         mEmptyContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_empty);
@@ -408,13 +438,13 @@ public class PLRecyclerView extends FrameLayout {
 
     private void obtainStyledAttributes(Context context, AttributeSet attrs) {
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PLRecyclerView);
-        int loadingResId = attributes.getResourceId(R.styleable.PLRecyclerView_loading_layout, R.layout.default_loading_layout);
-        int emptyResId = attributes.getResourceId(R.styleable.PLRecyclerView_empty_layout, R.layout.default_empty_layout);
-        int errorResId = attributes.getResourceId(R.styleable.PLRecyclerView_error_layout, R.layout.default_error_layout);
+        int loadingResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_loading_layout, R.layout.pl_rv_loading_layout);
+        int emptyResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_empty_layout, R.layout.pl_rv_empty_layout);
+        int errorResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_error_layout, R.layout.pl_rv_error_layout);
 
-        int loadMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_load_more_layout, R.layout.default_load_more_layout);
-        int noMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_no_more_layout, R.layout.default_no_more_layout);
-        int loadMoreErrorResId = attributes.getResourceId(R.styleable.PLRecyclerView_load_more_failed_layout, R.layout.default_load_more_failed_layout);
+        int loadMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_load_more_layout, R.layout.pl_rv_load_more_layout);
+        int noMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_no_more_layout, R.layout.pl_rv_no_more_layout);
+        int loadMoreErrorResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_load_more_failed_layout, R.layout.pl_rv_load_more_failed_layout);
 
         mLoadingView = LayoutInflater.from(context).inflate(loadingResId, mLoadingContainer, true);
         mEmptyView = LayoutInflater.from(context).inflate(emptyResId, mEmptyContainer, true);

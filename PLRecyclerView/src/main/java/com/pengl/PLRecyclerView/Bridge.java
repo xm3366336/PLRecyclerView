@@ -18,10 +18,17 @@ interface Bridge {
     }
 
     class Empty implements Bridge {
+        private int resId = 0;
+        private String content = null;
+
+        public Empty(int resId, String content) {
+            this.resId = resId;
+            this.content = content;
+        }
 
         @Override
         public void doSomething(PLRecyclerView host) {
-            host.displayEmptyAndResetStatus();
+            host.displayEmptyAndResetStatus(resId, content);
         }
     }
 
@@ -35,19 +42,17 @@ interface Bridge {
 
     class Error implements Bridge {
 
+        private int resId = 0;
         private String err = null;
 
-        public Error() {
-            super();
-        }
-
-        public Error(String err) {
+        public Error(int resId, String err) {
+            this.resId = resId;
             this.err = err;
         }
 
         @Override
         public void doSomething(PLRecyclerView host) {
-            host.displayErrorAndResetStatus(err);
+            host.displayErrorAndResetStatus(resId, err);
         }
     }
 

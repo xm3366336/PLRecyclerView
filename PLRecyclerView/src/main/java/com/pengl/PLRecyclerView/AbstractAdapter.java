@@ -21,6 +21,7 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
  * FIXME
  */
 public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractViewHolder> extends RecyclerView.Adapter<VH> {
+
     private DataSetObservable<T> dataSet;
     private RecyclerView mRecyclerView;
 
@@ -30,18 +31,22 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
 
     public void clear() {
         dataSet.clear();
+        notifyDataSetChanged();
     }
 
     public void clearData() {
         dataSet.data.clear();
+        notifyDataSetChanged();
     }
 
     public void clearHeader() {
         dataSet.header.clear();
+        notifyDataSetChanged();
     }
 
     public void clearFooter() {
         dataSet.footer.clear();
+        notifyDataSetChanged();
     }
 
     /**
@@ -63,11 +68,22 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param data list of data
      */
     public void addAll(List<? extends T> data) {
-        dataSet.data.addAll(data);
-        notifyDataSetChanged();
+        if (null == data) {
+            return;
+        }
+
+        int oldSize = dataSet.data.size();
+        if (oldSize > 0) {
+            dataSet.data.addAll(data);
+            notifyItemRangeInserted(oldSize, data.size());
+        } else {
+            dataSet.data.clear();
+            dataSet.data.addAll(data);
+            notifyDataSetChanged();
+        }
 
         if (dataSet.totalSize() == 0) {
-            dataSet.notifyEmpty();
+            dataSet.notifyEmpty(0, null);
         } else {
             dataSet.notifyContent();
             if (data.size() == 0) {
@@ -95,6 +111,12 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         notifyItemInserted(adapterPosition);
     }
 
+    /**
+     * 正常插入多项数据
+     *
+     * @param adapterPosition 插入的位置
+     * @param items           插入的数据
+     */
     public void insertAll(int adapterPosition, List<? extends T> items) {
         dataSet.data.insertAll(adapterPosition, items);
         notifyItemRangeInserted(adapterPosition, items.size());
@@ -111,6 +133,12 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         notifyItemInserted(adapterPosition + 1);
     }
 
+    /**
+     * 插入多项数据到position之后
+     *
+     * @param adapterPosition 插入的位置
+     * @param items           插入的数据
+     */
     public void insertAllBack(int adapterPosition, List<? extends T> items) {
         dataSet.data.insertAllBack(adapterPosition, items);
         notifyItemRangeInserted(adapterPosition + 1, items.size());
@@ -188,7 +216,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
-     * get data set header size
+     * 获取Header的个数
      *
      * @return header size
      */
@@ -201,7 +229,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
-     * Just get data size, doesn't include header footer.
+     * 获取数据量，不包含Header和Footer
      *
      * @return data size
      */
@@ -224,18 +252,30 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * 清除当前所有数据，并显示Empty
      */
     public void showEmpty() {
+        showEmpty(0, null);
+    }
+
+    /**
+     * 清除当前所有数据，并显示Empty
+     */
+    public void showEmpty(String content) {
+        showEmpty(0, content);
+    }
+
+    /**
+     * 清除当前所有数据，并显示Empty
+     */
+    public void showEmpty(int resId, String content) {
         dataSet.clear();
         notifyDataSetChanged();
-        dataSet.notifyEmpty();
+        dataSet.notifyEmpty(resId, content);
     }
 
     /**
      * 清除当前所有数据,并显示ErrorView
      */
     public void showError() {
-        dataSet.clear();
-        notifyDataSetChanged();
-        dataSet.notifyError();
+        showError(0, null);
     }
 
     /**
@@ -244,9 +284,19 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param error 显示具体的错误原因
      */
     public void showError(String error) {
+        showError(0, error);
+    }
+
+    /**
+     * 清除当前所有数据,并显示ErrorView
+     *
+     * @param resId 错误原因，显示一个图片id
+     * @param error 显示具体的错误原因
+     */
+    public void showError(int resId, String error) {
         dataSet.clear();
         notifyDataSetChanged();
-        dataSet.notifyError(error);
+        dataSet.notifyError(resId, error);
     }
 
     /**
@@ -268,6 +318,13 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      */
     public void manualLoadMore() {
         dataSet.notifyManualLoadMore();
+    }
+
+    /**
+     * 没有更多的数据了
+     */
+    public void showNoMore() {
+        dataSet.notifyNoMore();
     }
 
     @Override

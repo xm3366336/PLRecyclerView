@@ -12,6 +12,6 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:load_more_layout="@layout/manual_load_layout"/>
+        app:pl_rv_load_more_layout="@layout/manual_load_layout"/>
 
 </RelativeLayout>

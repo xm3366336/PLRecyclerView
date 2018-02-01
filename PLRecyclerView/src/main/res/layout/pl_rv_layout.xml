@@ -14,20 +14,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <FrameLayout
                 android:id="@+id/practical_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
 
-
             <FrameLayout
                 android:id="@+id/practical_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
-
 
             <FrameLayout
                 android:id="@+id/practical_loading"
