@@ -1,5 +1,6 @@
 package com.pengl.PLRecyclerView;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+    public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         if (!(recyclerView.getAdapter() instanceof AbstractAdapter)) {
             return 0;
         }
@@ -59,7 +60,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
 
     @Override
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         if (!mAdapter.canDrag(viewHolder.getAdapterPosition()) || !mAdapter.canDrag(target.getAdapterPosition())) {
             return true;
         }
@@ -78,7 +79,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         if (!mAdapter.canDrag(viewHolder.getAdapterPosition())) {
             return;
         }

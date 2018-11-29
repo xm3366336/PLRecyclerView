@@ -7,14 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.pengl.PLRecyclerView.ConfigureAdapter;
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.Header;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pengl.demo.Header;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.ConfigureAdapter;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -24,7 +26,7 @@ import com.pengl.PLRecyclerView.PLRecyclerView;
  */
 public class ManualLoadMoreActivity extends AppCompatActivity {
 
-    @BindView(R.id.recycler)
+    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
 
     private SingleItemAdapter mAdapter;
@@ -107,8 +109,8 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
             @Override
             public void configureLoadMoreView(View loadMoreView) {
                 super.configureLoadMoreView(loadMoreView);
-                mNextPage = (Button) loadMoreView.findViewById(R.id.next_page);
-                mProgress = (LinearLayout) loadMoreView.findViewById(R.id.loading);
+                mNextPage = loadMoreView.findViewById(R.id.next_page);
+                mProgress = loadMoreView.findViewById(R.id.loading);
                 mNextPage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

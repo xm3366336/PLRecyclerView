@@ -7,23 +7,25 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
 
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.Header;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pengl.demo.Header;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class GridActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.recycler)
+    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R.id.content_grid)
+    @BindView(R2.id.content_grid)
     RelativeLayout mContentGrid;
-    @BindView(R.id.fab)
+    @BindView(R2.id.fab)
     FloatingActionButton mFab;
 
     private GridAdapter mAdapter;

@@ -3,11 +3,13 @@ package com.pengl.demo.staggered;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.pengl.PLRecyclerView.AbstractViewHolder;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -16,7 +18,7 @@ import com.pengl.PLRecyclerView.AbstractViewHolder;
  * FIXME
  */
 public class StaggerViewHolder extends AbstractViewHolder<StaggerBean> {
-    @BindView(R.id.text)
+    @BindView(R2.id.text)
     TextView mText;
 
     public StaggerViewHolder(ViewGroup parent) {

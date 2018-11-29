@@ -8,25 +8,27 @@ import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.pengl.PLRecyclerView.ItemType;
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.Header;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pengl.demo.Header;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.ItemType;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class MultiItemActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.recycler)
+    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R.id.content_multi_item)
+    @BindView(R2.id.content_multi_item)
     RelativeLayout mContentMultiItem;
-    @BindView(R.id.fab)
+    @BindView(R2.id.fab)
     FloatingActionButton mFab;
 
     private MultiItemAdapter mAdapter;

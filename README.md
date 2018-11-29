@@ -1,8 +1,17 @@
 # PLRecyclerView
-给自个儿用的RecyclerView
-主要目的：
+给自个儿用的RecyclerView，主要目的：
+
 1. 练习Github和JCenter仓库的使用；
 2. 自己用；
+
+## Update 20181129
+1. compileSdkVersion up to 28
+2. gradle up to 4.6
+3. 换两个图标
+
+## Update 20180828
+1. compileSdkVersion up to 27
+2. gradle up to 3.1.4
 
 ## Update 20180201
 1. 新增接口showEmpty(int resId, String content);

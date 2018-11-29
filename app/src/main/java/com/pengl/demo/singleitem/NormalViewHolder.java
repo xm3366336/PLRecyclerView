@@ -6,12 +6,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pengl.PLRecyclerView.AbstractViewHolder;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -21,11 +22,11 @@ import com.pengl.PLRecyclerView.AbstractViewHolder;
  */
 
 class NormalViewHolder extends AbstractViewHolder<NormalBean> {
-    @BindView(R.id.head)
+    @BindView(R2.id.head)
     ImageView mHead;
-    @BindView(R.id.title)
+    @BindView(R2.id.title)
     TextView mTitle;
-    @BindView(R.id.content)
+    @BindView(R2.id.content)
     TextView mContent;
 
     private Context mContext;

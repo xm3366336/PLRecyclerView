@@ -6,17 +6,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.Header;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.pengl.demo.Header;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class SingleItemActivity extends AppCompatActivity {
 
-    @BindView(R.id.recycler)
+    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
 
     private boolean isNoMoreEnabled = false;

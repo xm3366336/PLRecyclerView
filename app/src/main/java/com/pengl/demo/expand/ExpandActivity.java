@@ -1,7 +1,6 @@
-package com.pengl.demo.main;
+package com.pengl.demo.expand;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -15,41 +14,45 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class ExpandActivity extends AppCompatActivity {
 
     @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R2.id.fab)
-    FloatingActionButton mFab;
     @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
 
-    private MainAdapter mAdapter;
-    private MainPresenter mPresenter;
+    private ExpandAdapter mAdapter;
+    private ExpandPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_expand);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-
-        mAdapter = new MainAdapter();
-        mPresenter = new MainPresenter(this);
-
+        mAdapter = new ExpandAdapter();
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
-        mPresenter.setDataLoadCallBack(new MainView() {
+        mRecycler.setRefreshListener(new PLRecyclerView.OnRefreshListener() {
             @Override
-            public void onLoadSuccess(List<MenuBean> menu) {
+            public void onRefresh() {
+                mPresenter.loadData();
+            }
+        });
+
+        mPresenter = new ExpandPresenter(this);
+        mPresenter.setDataLoadCallBack(new ExpandView() {
+            @Override
+            public void onDataLoadSuccess(List<ParentBean> list) {
                 mAdapter.clear();
-                mAdapter.addAll(menu);
+//                mAdapter.addHeader(new Header());
+                //                    mAdapter.addFooter(new Header());
+                mAdapter.addAll(list);
             }
 
             @Override
-            public void onLoadFailed() {
-                mAdapter.showError();
+            public void onDataLoadFailed() {
             }
         });
     }

@@ -2,6 +2,7 @@ package com.pengl.PLRecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -327,8 +328,9 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         dataSet.notifyNoMore();
     }
 
+    @NonNull
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         VH viewHolder = createHeaderFooterViewHolder(parent, viewType);
         if (viewHolder != null)
             return viewHolder;
@@ -336,7 +338,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(@NonNull VH holder, int position) {
         if (dataSet.header.is(position)) {
             dataSet.header.get(position).onBind();
         } else if (dataSet.data.is(position)) {
@@ -369,13 +371,13 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     @Override
-    public void onViewAttachedToWindow(VH holder) {
+    public void onViewAttachedToWindow(@NonNull VH holder) {
         super.onViewAttachedToWindow(holder);
         int position = holder.getAdapterPosition();
 
         //瀑布流的 Header Footer 宽度处理
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-        if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+        if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
             if (!dataSet.data.is(position)) {
                 p.setFullSpan(true);
@@ -397,7 +399,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mRecyclerView = recyclerView;
 

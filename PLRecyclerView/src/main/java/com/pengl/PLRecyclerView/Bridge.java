@@ -18,8 +18,8 @@ interface Bridge {
     }
 
     class Empty implements Bridge {
-        private int resId = 0;
-        private String content = null;
+        private int resId;
+        private String content;
 
         public Empty(int resId, String content) {
             this.resId = resId;
@@ -42,8 +42,8 @@ interface Bridge {
 
     class Error implements Bridge {
 
-        private int resId = 0;
-        private String err = null;
+        private int resId;
+        private String err;
 
         public Error(int resId, String err) {
             this.resId = resId;

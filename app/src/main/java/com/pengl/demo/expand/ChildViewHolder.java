@@ -1,4 +1,4 @@
-package com.pengl.demo.grid;
+package com.pengl.demo.expand;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -15,28 +15,29 @@ import butterknife.OnClick;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 10:15
+ * Date: 2016/10/17
+ * Time: 15:31
  * FIXME
  */
-public class GridViewHolder extends AbstractViewHolder<GridBean> {
+class ChildViewHolder extends AbstractViewHolder<ChildBean> {
     @BindView(R2.id.text)
     TextView mText;
+
     private Context mContext;
 
-    public GridViewHolder(ViewGroup parent) {
-        super(parent, R.layout.grid_item);
+    ChildViewHolder(ViewGroup parent) {
+        super(parent, R.layout.child_item);
         ButterKnife.bind(this, itemView);
         mContext = parent.getContext();
     }
 
     @Override
-    public void setData(GridBean data) {
-        mText.setText(data.text);
+    public void setData(ChildBean data) {
+        mText.setText(String.valueOf(data.text));
     }
 
     @OnClick(R.id.text)
     public void onClick() {
-        Toast.makeText(mContext, mText.getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "i am child view", Toast.LENGTH_SHORT).show();
     }
 }

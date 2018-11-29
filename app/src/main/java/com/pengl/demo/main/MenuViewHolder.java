@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.pengl.PLRecyclerView.AbstractViewHolder;
 import com.pengl.demo.R;
+import com.pengl.demo.R2;
 import com.pengl.demo.drag.DragActivity;
 import com.pengl.demo.expand.ExpandActivity;
 import com.pengl.demo.grid.GridActivity;
@@ -18,7 +17,10 @@ import com.pengl.demo.multipleitem.MultiItemActivity;
 import com.pengl.demo.singleitem.ManualLoadMoreActivity;
 import com.pengl.demo.singleitem.SingleItemActivity;
 import com.pengl.demo.staggered.StaggeredActivity;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -27,9 +29,9 @@ import com.pengl.PLRecyclerView.AbstractViewHolder;
  * FIXME
  */
 class MenuViewHolder extends AbstractViewHolder<MenuBean> {
-    @BindView(R.id.menu)
+    @BindView(R2.id.menu)
     TextView mMenu;
-    @BindView(R.id.container)
+    @BindView(R2.id.container)
     LinearLayout mLayout;
 
     private Context mContext;

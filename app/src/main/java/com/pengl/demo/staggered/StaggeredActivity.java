@@ -7,24 +7,26 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
 
+import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.demo.Header;
+import com.pengl.demo.R;
+import com.pengl.demo.R2;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pengl.demo.Header;
-import com.pengl.demo.R;
-import com.pengl.PLRecyclerView.PLRecyclerView;
 
 public class StaggeredActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.recycler)
+    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R.id.content_staggered)
+    @BindView(R2.id.content_staggered)
     RelativeLayout mContentStaggered;
-    @BindView(R.id.fab)
+    @BindView(R2.id.fab)
     FloatingActionButton mFab;
 
     private StaggerAdapter mAdapter;

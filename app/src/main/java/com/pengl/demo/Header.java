@@ -5,12 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.pengl.PLRecyclerView.SectionItem;
+
 import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
-import com.pengl.PLRecyclerView.SectionItem;
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -19,7 +20,7 @@ import com.pengl.PLRecyclerView.SectionItem;
  * FIXME
  */
 public class Header implements SectionItem {
-    @BindView(R.id.banner_guide_content)
+    @BindView(R2.id.banner_guide_content)
     BGABanner mBanner;
 
     @Override
@@ -37,7 +38,6 @@ public class Header implements SectionItem {
                 ((ImageView) view).setImageResource((int) model);
             }
         });
-        mBanner.setData(Arrays.asList(R.mipmap.a, R.mipmap.b, R.mipmap.c, R.mipmap.d, R.mipmap.e, R.mipmap.f,
-                R.mipmap.g, R.mipmap.h), null);
+        mBanner.setData(Arrays.asList(R.mipmap.a, R.mipmap.b, R.mipmap.c, R.mipmap.d, R.mipmap.e, R.mipmap.f, R.mipmap.g, R.mipmap.h), null);
     }
 }

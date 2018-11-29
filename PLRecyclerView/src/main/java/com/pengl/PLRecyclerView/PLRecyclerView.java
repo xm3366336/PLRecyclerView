@@ -127,7 +127,7 @@ public class PLRecyclerView extends FrameLayout {
         if (loadMoreListener == null)
             return;
         mLoadMoreListener = loadMoreListener;
-        /**
+        /*
          * 避免第一次滑动到底部时需要再次滑动才会显示load more
          */
         displayLoadMoreViewOrDisappear();
@@ -269,7 +269,7 @@ public class PLRecyclerView extends FrameLayout {
         mErrorContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(VISIBLE);
 
-        TextView tv = (TextView) mEmptyView.findViewById(R.id.tv_content);
+        TextView tv = mEmptyView.findViewById(R.id.tv_content);
         if (null != mEmptyView && null != tv) {
             if (!TextUtils.isEmpty(content)) {
                 tv.setText(content);
@@ -290,7 +290,7 @@ public class PLRecyclerView extends FrameLayout {
         mEmptyContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(VISIBLE);
 
-        TextView tv = (TextView) mErrorView.findViewById(R.id.tv_content);
+        TextView tv = mErrorView.findViewById(R.id.tv_content);
         if (null != mErrorView && null != tv) {
             if (!TextUtils.isEmpty(error)) {
                 tv.setText(error);
@@ -366,13 +366,13 @@ public class PLRecyclerView extends FrameLayout {
 
     private void initMainView(Context context) {
         mMainContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.pl_rv_layout, this, true);
-        mLoadingContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_loading);
-        mErrorContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_error);
-        mEmptyContainer = (FrameLayout) mMainContainer.findViewById(R.id.practical_empty);
-        mContentContainer = (LinearLayout) mMainContainer.findViewById(R.id.practical_content);
+        mLoadingContainer = mMainContainer.findViewById(R.id.practical_loading);
+        mErrorContainer = mMainContainer.findViewById(R.id.practical_error);
+        mEmptyContainer = mMainContainer.findViewById(R.id.practical_empty);
+        mContentContainer = mMainContainer.findViewById(R.id.practical_content);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mMainContainer.findViewById(R.id.practical_swipe_refresh);
-        mRecyclerView = (RecyclerView) mMainContainer.findViewById(R.id.practical_recycler);
+        mSwipeRefreshLayout = mMainContainer.findViewById(R.id.practical_swipe_refresh);
+        mRecyclerView = mMainContainer.findViewById(R.id.practical_recycler);
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.material_colors));
     }
 
