@@ -7,10 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/12
- * Time: 10:28
- * FIXME
+ *
  */
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 

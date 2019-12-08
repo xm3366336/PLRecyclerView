@@ -7,19 +7,13 @@ import android.support.v7.widget.Toolbar;
 
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ExpandActivity extends AppCompatActivity {
 
-    @BindView(R2.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R2.id.recycler)
-    PLRecyclerView mRecycler;
+    private Toolbar mToolbar;
+    private PLRecyclerView mRecycler;
 
     private ExpandAdapter mAdapter;
     private ExpandPresenter mPresenter;
@@ -28,8 +22,10 @@ public class ExpandActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expand);
-        ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+
+        mRecycler = findViewById(R.id.recycler);
         mAdapter = new ExpandAdapter();
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);

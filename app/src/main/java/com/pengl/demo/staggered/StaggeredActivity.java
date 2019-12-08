@@ -1,7 +1,6 @@
 package com.pengl.demo.staggered;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -10,39 +9,30 @@ import android.widget.RelativeLayout;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
+/**
+ * 瀑布流
+ */
 public class StaggeredActivity extends AppCompatActivity {
 
-    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R2.id.content_staggered)
     RelativeLayout mContentStaggered;
-    @BindView(R2.id.fab)
-    FloatingActionButton mFab;
 
     private StaggerAdapter mAdapter;
     private StaggerPresenter mPresenter;
-
-    @OnClick(R.id.fab)
-    public void onClick() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staggered);
-        ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
+        mContentStaggered = findViewById(R.id.content_staggered);
+        mRecycler = findViewById(R.id.recycler);
         mAdapter = new StaggerAdapter();
         mRecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         mRecycler.setAdapterWithLoading(mAdapter);

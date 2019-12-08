@@ -1,10 +1,7 @@
 package com.pengl.PLRecyclerView;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/28
- * Time: 14:35
- * FIXME
+ *
  */
 interface Bridge {
     void doSomething(PLRecyclerView host);

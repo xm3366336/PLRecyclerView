@@ -4,10 +4,7 @@ import com.pengl.demo.RecyclerItemType;
 import com.pengl.PLRecyclerView.ItemType;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 11:56
- * FIXME
+ *
  */
 public class TypeTwoBean implements ItemType {
     String text;

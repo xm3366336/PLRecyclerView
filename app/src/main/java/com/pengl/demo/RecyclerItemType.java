@@ -1,13 +1,16 @@
 package com.pengl.demo;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/22
- * Time: 10:01
- * FIXME
+ *
  */
 public enum RecyclerItemType {
-    NORMAL(0), TYPE1(1), TYPE2(2), TYPE3(3), PARENT(4), CHILD(5);
+
+    NORMAL(0), //
+    TYPE1(1),  //
+    TYPE2(2),  //
+    TYPE3(3),  //
+    PARENT(4), //
+    CHILD(5);  //
 
     // 定义私有变量
     private int nCode;

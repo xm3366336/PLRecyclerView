@@ -10,29 +10,22 @@ import android.widget.Toast;
 
 import com.pengl.PLRecyclerView.AbstractViewHolder;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/12
- * Time: 11:43
- * FIXME
+ *
  */
-class DragViewHolder extends AbstractViewHolder<DragBean> {
-    @BindView(R2.id.text)
-    TextView mText;
-    @BindView(R2.id.reorder)
-    ImageView mReorder;
+class DragViewHolder extends AbstractViewHolder<DragBean> implements View.OnClickListener {
+
+    private TextView mText;
+    private ImageView mReorder;
     private Context mContext;
 
     DragViewHolder(ViewGroup parent) {
         super(parent, R.layout.drag_item);
-        ButterKnife.bind(this, itemView);
         mContext = parent.getContext();
+        mText = itemView.findViewById(R.id.text);
+        mReorder = itemView.findViewById(R.id.reorder);
+        mText.setOnClickListener(this);
 
         //触摸拖拽
         mReorder.setOnTouchListener(new View.OnTouchListener() {
@@ -63,8 +56,8 @@ class DragViewHolder extends AbstractViewHolder<DragBean> {
         }
     }
 
-    @OnClick(R.id.text)
-    public void onClick() {
+    @Override
+    public void onClick(View v) {
         Toast.makeText(mContext, mText.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }

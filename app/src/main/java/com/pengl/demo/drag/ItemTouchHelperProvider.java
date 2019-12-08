@@ -3,12 +3,10 @@ package com.pengl.demo.drag;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/17
- * Time: 10:08
- * FIXME
+ *
  */
 class ItemTouchHelperProvider {
+
     private static ItemTouchHelper ourInstance;
 
     private ItemTouchHelperProvider() {
@@ -24,4 +22,5 @@ class ItemTouchHelperProvider {
     static void init(ItemTouchHelper.Callback callback) {
         ourInstance = new ItemTouchHelper(callback);
     }
+
 }

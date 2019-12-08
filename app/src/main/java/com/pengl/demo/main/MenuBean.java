@@ -3,14 +3,36 @@ package com.pengl.demo.main;
 import com.pengl.PLRecyclerView.ItemType;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/8
- * Time: 14:21
- * FIXME
+ *
  */
 class MenuBean implements ItemType {
-    public String menu;
-    public int type;
+
+    private String menu;
+    private int type;
+
+    public MenuBean() {
+    }
+
+    public MenuBean(String menu, int type) {
+        this.menu = menu;
+        this.type = type;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     @Override
     public int itemType() {

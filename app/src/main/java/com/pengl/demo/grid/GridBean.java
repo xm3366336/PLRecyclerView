@@ -3,10 +3,7 @@ package com.pengl.demo.grid;
 import com.pengl.PLRecyclerView.ItemType;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 10:15
- * FIXME
+ *
  */
 public class GridBean implements ItemType {
     String text;

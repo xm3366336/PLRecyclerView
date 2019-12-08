@@ -7,29 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/12
- * Time: 11:46
- * FIXME
+ *
  */
 class DragPresenter {
 
-    private CompositeSubscription mSubscriptions;
+    private CompositeDisposable mCompositeDisposable;
     private DragView mView;
-    private Context mContext;
 
     DragPresenter(Context context) {
-        mContext = context;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     void setDataLoadCallBack(DragView view) {
@@ -37,45 +34,52 @@ class DragPresenter {
     }
 
     void unsubscribeAll() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
     }
 
     void loadData() {
-        Subscription subscription = createObservable()
-                .subscribeOn(Schedulers.io())
-                .delay(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<DragBean>>() {
+        Disposable disposable = createObservable() //
+                .subscribeOn(Schedulers.io())//
+                .delay(2, TimeUnit.SECONDS)//
+                .observeOn(AndroidSchedulers.mainThread())//
+                .subscribe(new Consumer<List<DragBean>>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.w("SingleItemPresenter", e);
-                        mView.onDataLoadFailed();
-                    }
-
-                    @Override
-                    public void onNext(List<DragBean> list) {
+                    public void accept(List<DragBean> list) throws Exception {
+                        // 这里接收数据项，相当于onNext
+                        for (DragBean b : list) {
+                            Log.v("info", "----->" + b.text);
+                        }
                         mView.onDataLoadSuccess(list);
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        // 这里接收onError
+                        throwable.printStackTrace();
+                        mView.onDataLoadFailed();
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        // 这里接收onComplete。
+                    }
                 });
-        mSubscriptions.add(subscription);
+        mCompositeDisposable.add(disposable);
     }
 
     private Observable<List<DragBean>> createObservable() {
-        return Observable.create(new Observable.OnSubscribe<List<DragBean>>() {
+        return Observable.create(new ObservableOnSubscribe<List<DragBean>>() {
             @Override
-            public void call(Subscriber<? super List<DragBean>> subscriber) {
+            public void subscribe(ObservableEmitter<List<DragBean>> subscriber) throws Exception {
+
                 List<DragBean> mData = new ArrayList<>();
                 for (int i = 0; i < 5; i++) {
                     DragBean bean = new DragBean(i + "");
                     mData.add(bean);
                 }
+
                 subscriber.onNext(mData);
-                subscriber.onCompleted();
+                subscriber.onComplete();
             }
         });
     }

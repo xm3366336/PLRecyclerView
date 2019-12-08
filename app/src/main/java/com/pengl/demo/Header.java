@@ -9,24 +9,19 @@ import com.pengl.PLRecyclerView.SectionItem;
 
 import java.util.Arrays;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 11:47
- * FIXME
+ *
  */
 public class Header implements SectionItem {
-    @BindView(R2.id.banner_guide_content)
-    BGABanner mBanner;
+
+    private BGABanner mBanner;
 
     @Override
     public View createView(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_item, parent, false);
-        ButterKnife.bind(this, view);
+        mBanner = view.findViewById(R.id.banner_guide_content);
         return view;
     }
 

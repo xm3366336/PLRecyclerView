@@ -1,7 +1,6 @@
 package com.pengl.demo.grid;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -10,35 +9,27 @@ import android.widget.RelativeLayout;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class GridActivity extends AppCompatActivity {
 
-    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R2.id.content_grid)
     RelativeLayout mContentGrid;
-    @BindView(R2.id.fab)
-    FloatingActionButton mFab;
 
     private GridAdapter mAdapter;
-
     private GridPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
-        ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
+        mContentGrid = findViewById(R.id.content_grid);
+        mRecycler = findViewById(R.id.recycler);
         mAdapter = new GridAdapter();
         mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
         mRecycler.setAdapterWithLoading(mAdapter);

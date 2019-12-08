@@ -1,46 +1,37 @@
 package com.pengl.demo.expand;
 
-import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pengl.PLRecyclerView.AbstractAdapter;
 import com.pengl.PLRecyclerView.AbstractViewHolder;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/17
- * Time: 15:30
- * FIXME
+ *
  */
-class ParentViewHolder extends AbstractViewHolder<ParentBean> {
+class ParentViewHolder extends AbstractViewHolder<ParentBean> implements View.OnClickListener {
 
-    @BindView(R2.id.text)
     TextView mText;
-    @BindView(R2.id.image)
     ImageView mImageView;
 
     private ParentBean parent;
     private List<ChildBean> child;
 
-    private Context mContext;
     private ExpandAdapter mAdapter;
 
     ParentViewHolder(AbstractAdapter adapter, ViewGroup parent) {
         super(parent, R.layout.parent_item);
-        ButterKnife.bind(this, itemView);
-        mContext = parent.getContext();
+        mText = itemView.findViewById(R.id.text);
+        mImageView = itemView.findViewById(R.id.image);
         mAdapter = (ExpandAdapter) adapter;
+
+        mText.setOnClickListener(this);
     }
 
     @Override
@@ -50,16 +41,16 @@ class ParentViewHolder extends AbstractViewHolder<ParentBean> {
         parent = data;
     }
 
-    @OnClick(R.id.text)
-    public void onClick() {
+    @Override
+    public void onClick(View v) {
         if (parent.isExpand) {
             mAdapter.removeBack(getAdapterPosition(), child.size());
             parent.isExpand = false;
-            Picasso.with(mContext).load(R.drawable.ic_keyboard_arrow_down).into(mImageView);
+            Glide.with(mImageView.getContext()).load(R.drawable.ic_keyboard_arrow_down).into(mImageView);
         } else {
             mAdapter.insertAllBack(getAdapterPosition(), child);
             parent.isExpand = true;
-            Picasso.with(mContext).load(R.drawable.ic_keyboard_arrow_up).into(mImageView);
+            Glide.with(mImageView.getContext()).load(R.drawable.ic_keyboard_arrow_up).into(mImageView);
         }
     }
 }

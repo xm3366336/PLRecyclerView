@@ -11,22 +11,14 @@ import com.pengl.PLRecyclerView.ConfigureAdapter;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/11
- * Time: 15:24
- * FIXME
+ *
  */
 public class ManualLoadMoreActivity extends AppCompatActivity {
 
-    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
 
     private SingleItemAdapter mAdapter;
@@ -39,7 +31,7 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_load);
-        ButterKnife.bind(this);
+        mRecycler = findViewById(R.id.recycler);
 
         configurePresenter();
         configureRecyclerView();

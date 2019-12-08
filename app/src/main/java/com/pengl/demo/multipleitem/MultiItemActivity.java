@@ -1,10 +1,10 @@
 package com.pengl.demo.multipleitem;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -12,46 +12,30 @@ import com.pengl.PLRecyclerView.ItemType;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class MultiItemActivity extends AppCompatActivity {
 
-    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R2.id.content_multi_item)
     RelativeLayout mContentMultiItem;
-    @BindView(R2.id.fab)
-    FloatingActionButton mFab;
 
     private MultiItemAdapter mAdapter;
     private MultiItemPresenter mPresenter;
 
     private boolean flag = true;
 
-    @OnClick(R.id.fab)
-    public void onClick() {
-        flag = !flag;
-        Toast.makeText(this, "flag:" + flag, Toast.LENGTH_SHORT).show();
-//        mRecycler.setNoMoreViewEnabled(flag);
-        mRecycler.setLoadMoreViewEnabled(flag);
-//        mRecycler.setLoadMoreFailedViewEnabled(flag);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_item);
-        ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
+        mContentMultiItem = findViewById(R.id.content_multi_item);
+        mRecycler = findViewById(R.id.recycler);
         mAdapter = new MultiItemAdapter();
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
@@ -91,6 +75,17 @@ public class MultiItemActivity extends AppCompatActivity {
                 } else {
                     mAdapter.loadMoreFailed();
                 }
+            }
+        });
+
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flag = !flag;
+                Toast.makeText(MultiItemActivity.this, "flag:" + flag, Toast.LENGTH_SHORT).show();
+//        mRecycler.setNoMoreViewEnabled(flag);
+                mRecycler.setLoadMoreViewEnabled(flag);
+//        mRecycler.setLoadMoreFailedViewEnabled(flag);
             }
         });
     }

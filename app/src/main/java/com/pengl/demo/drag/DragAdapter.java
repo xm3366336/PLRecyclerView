@@ -5,10 +5,7 @@ import android.view.ViewGroup;
 import com.pengl.PLRecyclerView.AbstractAdapter;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/12
- * Time: 11:45
- * FIXME
+ *
  */
 class DragAdapter extends AbstractAdapter<DragBean, DragViewHolder> {
     @Override

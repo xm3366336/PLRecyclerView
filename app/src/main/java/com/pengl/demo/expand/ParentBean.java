@@ -7,10 +7,7 @@ import com.pengl.demo.RecyclerItemType;
 import java.util.List;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/17
- * Time: 15:28
- * FIXME
+ *
  */
 class ParentBean implements ItemType {
 

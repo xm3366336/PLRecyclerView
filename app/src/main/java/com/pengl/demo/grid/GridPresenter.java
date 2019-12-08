@@ -7,29 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 11:42
- * FIXME
+ *
  */
 class GridPresenter {
+
+    private CompositeDisposable mCompositeDisposable;
+
     private static int count = -1;
-    private CompositeSubscription mSubscriptions;
     private GridView mView;
-    private Context mContext;
 
     GridPresenter(Context context) {
-        mContext = context;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     void setDataLoadCallBack(GridView gridView) {
@@ -37,40 +36,46 @@ class GridPresenter {
     }
 
     void unsubscribeAll() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
     }
 
     void loadData(final boolean isRefresh) {
-        Subscription subscription = createObservable()
-                .subscribeOn(Schedulers.io())
-                .delay(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<GridBean>>() {
+        Disposable disposable = createObservable() //
+                .subscribeOn(Schedulers.io())//
+                .delay(2, TimeUnit.SECONDS)//
+                .observeOn(AndroidSchedulers.mainThread())//
+                .subscribe(new Consumer<List<GridBean>>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void accept(List<GridBean> list) throws Exception {
+                        // 这里接收数据项，相当于onNext
+                        for (GridBean b : list) {
+                            Log.v("info", "----->" + b.text);
+                        }
+                        mView.onDataLoadSuccess(list, isRefresh);
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void onError(Throwable e) {
-                        Log.w("SingleItemPresenter", e);
+                    public void accept(Throwable throwable) throws Exception {
+                        // 这里接收onError
+                        throwable.printStackTrace();
                         mView.onDataLoadFailed(isRefresh);
                     }
-
+                }, new Action() {
                     @Override
-                    public void onNext(List<GridBean> gridBeen) {
-                        mView.onDataLoadSuccess(gridBeen, isRefresh);
+                    public void run() throws Exception {
+                        // 这里接收onComplete。
                     }
                 });
-        mSubscriptions.add(subscription);
+        mCompositeDisposable.add(disposable);
     }
 
     private Observable<List<GridBean>> createObservable() {
         count++;
         count %= 6;
-        return Observable.create(new Observable.OnSubscribe<List<GridBean>>() {
+        return Observable.create(new ObservableOnSubscribe<List<GridBean>>() {
             @Override
-            public void call(Subscriber<? super List<GridBean>> subscriber) {
+            public void subscribe(ObservableEmitter<List<GridBean>> subscriber) throws Exception {
+
                 if (count == 3) {
                     subscriber.onError(new Throwable("on error"));
                     return;
@@ -85,7 +90,7 @@ class GridPresenter {
                     mData.add(bean);
                 }
                 subscriber.onNext(mData);
-                subscriber.onCompleted();
+                subscriber.onComplete();
 
             }
         });

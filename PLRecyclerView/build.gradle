@@ -4,10 +4,10 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1811291
-        versionName "1.0.8"
+        versionCode 1912081
+        versionName "1.1.0"
     }
     buildTypes {
         release {

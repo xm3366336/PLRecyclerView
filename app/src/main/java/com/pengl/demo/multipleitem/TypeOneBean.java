@@ -4,10 +4,7 @@ import com.pengl.demo.RecyclerItemType;
 import com.pengl.PLRecyclerView.ItemType;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/21
- * Time: 15:11
- * FIXME
+ *
  */
 class TypeOneBean implements ItemType {
 

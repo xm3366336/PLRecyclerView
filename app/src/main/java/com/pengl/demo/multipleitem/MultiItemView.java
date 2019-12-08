@@ -1,14 +1,11 @@
 package com.pengl.demo.multipleitem;
 
-import java.util.List;
-
 import com.pengl.PLRecyclerView.ItemType;
 
+import java.util.List;
+
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 12:08
- * FIXME
+ *
  */
 public interface MultiItemView {
     void onDataLoadSuccess(List<ItemType> list, boolean isRefresh);

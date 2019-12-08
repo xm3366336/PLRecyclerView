@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pengl.demo.singleitem.SingleItemActivity">
 
-
     <com.pengl.PLRecyclerView.PLRecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:pl_rv_loading_layout="@layout/pl_rv_loading_layout"
         app:pl_rv_empty_layout="@layout/pl_rv_empty_layout"
         app:pl_rv_error_layout="@layout/pl_rv_error_layout"
+        app:pl_rv_load_more_failed_layout="@layout/pl_rv_load_more_failed_layout"
         app:pl_rv_load_more_layout="@layout/pl_rv_load_more_layout"
-        app:pl_rv_no_more_layout="@layout/pl_rv_no_more_layout"
-        app:pl_rv_load_more_failed_layout="@layout/pl_rv_load_more_failed_layout"/>
+        app:pl_rv_loading_layout="@layout/pl_rv_loading_layout"
+        app:pl_rv_no_more_layout="@layout/pl_rv_no_more_layout" />
 
 </RelativeLayout>

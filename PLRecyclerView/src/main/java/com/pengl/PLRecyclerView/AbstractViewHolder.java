@@ -7,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/21
- * Time: 14:35
- * FIXME
+ *
  */
 public abstract class AbstractViewHolder<T extends ItemType> extends RecyclerView.ViewHolder {
 

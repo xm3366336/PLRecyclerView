@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Observable;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/22
- * Time: 14:24
- * FIXME
+ *
  */
 class DataSetObservable<E> extends Observable {
     Segment<SectionItem> header = new HeaderSegment();
@@ -20,7 +17,6 @@ class DataSetObservable<E> extends Observable {
     private List<E> mData = new ArrayList<>();
     private List<SectionItem> mFooter = new ArrayList<>();
     private List<SectionItem> mExtra = new ArrayList<>();
-
 
     //------------------------------
     //|position    size     item   |
@@ -144,7 +140,7 @@ class DataSetObservable<E> extends Observable {
             }
         }
 
-        final boolean insertAllBack(int adapterPosition, List<? extends T> items) {
+        final void insertAllBack(int adapterPosition, List<? extends T> items) {
             if (is(adapterPosition)) {
                 int insertPosition = adapterPosition - positionImpl() + 1;
                 if (insertPosition == size()) {
@@ -152,7 +148,6 @@ class DataSetObservable<E> extends Observable {
                 } else {
                     insertAllImpl(insertPosition, items);
                 }
-                return true;
             } else {
                 throw new IndexOutOfBoundsException("Insert error, check your insert position");
             }

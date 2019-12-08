@@ -5,10 +5,7 @@ import android.view.ViewGroup;
 import com.pengl.PLRecyclerView.AbstractAdapter;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/10
- * Time: 10:25
- * FIXME
+ *
  */
 public class GridAdapter extends AbstractAdapter<GridBean, GridViewHolder> {
     @Override

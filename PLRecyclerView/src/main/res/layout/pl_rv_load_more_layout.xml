@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="wrap_content"
     android:gravity="center"
+    android:minHeight="48dip"
     android:orientation="horizontal">
 
     <android.support.v4.widget.ContentLoadingProgressBar
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:gravity="center"
-        android:text="@string/pl_rv_loading"/>
+        android:text="@string/pl_rv_loading"
+        android:textSize="13dip"
+        tools:ignore="SpUsage" />
 </LinearLayout>
 

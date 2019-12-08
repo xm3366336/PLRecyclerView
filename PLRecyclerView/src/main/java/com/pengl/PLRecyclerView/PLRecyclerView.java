@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,12 +22,8 @@ import android.widget.TextView;
 import java.util.Observable;
 import java.util.Observer;
 
-
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/21
- * Time: 13:56
- * FIXME
+ *
  */
 public class PLRecyclerView extends FrameLayout {
 
@@ -415,7 +412,7 @@ public class PLRecyclerView extends FrameLayout {
         isRefreshing = true;
     }
 
-    private void closeRefreshing() {
+    public void closeRefreshing() {
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
             isRefreshing = false;
@@ -483,7 +480,7 @@ public class PLRecyclerView extends FrameLayout {
     private class OnScrollListener extends RecyclerView.OnScrollListener {
 
         @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
             //当滚动到最后一个item时,自动加载更多
             if (isLastItem(recyclerView)) {

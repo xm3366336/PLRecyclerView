@@ -1,68 +1,63 @@
 package com.pengl.demo.main;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 
+import com.pengl.PLRecyclerView.PLLinearLayoutManager;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R2.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R2.id.fab)
-    FloatingActionButton mFab;
-    @BindView(R2.id.recycler)
-    PLRecyclerView mRecycler;
-
     private MainAdapter mAdapter;
-    private MainPresenter mPresenter;
+//    private MainPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         mAdapter = new MainAdapter();
-        mPresenter = new MainPresenter(this);
+//        mPresenter = new MainPresenter(this);
 
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        PLRecyclerView mRecycler = findViewById(R.id.recycler);
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
-        mPresenter.setDataLoadCallBack(new MainView() {
-            @Override
-            public void onLoadSuccess(List<MenuBean> menu) {
-                mAdapter.clear();
-                mAdapter.addAll(menu);
-            }
+//        mPresenter.setDataLoadCallBack(new MainView() {
+//            @Override
+//            public void onLoadSuccess(List<MenuBean> menu) {
+//                mAdapter.clear();
+//                mAdapter.addAll(menu);
+//            }
+//
+//            @Override
+//            public void onLoadFailed() {
+//                mAdapter.showError();
+//            }
+//        });
 
-            @Override
-            public void onLoadFailed() {
-                mAdapter.showError();
-            }
-        });
+//        mPresenter.loadData();
+
+        final String[] resource = getResources().getStringArray(R.array.main_fun);
+        List<MenuBean> mData = new ArrayList<>();
+        for (int i = 0; i < resource.length; i++) {
+            mData.add(new MenuBean(resource[i], i));
+        }
+        mAdapter.clear();
+        mAdapter.addAll(mData);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.unsubscribeAll();
+//        mPresenter.unsubscribeAll();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.loadData();
-    }
 }

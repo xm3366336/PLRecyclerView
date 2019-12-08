@@ -16,10 +16,7 @@ import java.util.Observer;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/21
- * Time: 14:34
- * FIXME
+ *
  */
 public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractViewHolder> extends RecyclerView.Adapter<VH> {
 

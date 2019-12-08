@@ -1,36 +1,36 @@
 package com.pengl.demo.main;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.util.Log;
+
+import com.pengl.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import com.pengl.demo.R;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/10/8
- * Time: 14:34
- * FIXME
+ *
  */
 class MainPresenter {
 
-    private CompositeSubscription mSubscriptions;
+    private CompositeDisposable mCompositeDisposable;
     private Context mContext;
     private MainView mMainView;
 
     MainPresenter(Context context) {
         mContext = context;
-        mSubscriptions = new CompositeSubscription();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     void setDataLoadCallBack(MainView mainView) {
@@ -38,49 +38,51 @@ class MainPresenter {
     }
 
     void unsubscribeAll() {
-        mSubscriptions.clear();
+        mCompositeDisposable.clear();
     }
 
     void loadData() {
-        Subscription subscription = createObservable()
-                .subscribeOn(Schedulers.io())
-                .delay(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<MenuBean>>() {
+        Disposable disposable = createObservable() //
+                .subscribeOn(Schedulers.io())//
+                .delay(2, TimeUnit.SECONDS)//
+                .observeOn(AndroidSchedulers.mainThread())//
+                .subscribe(new Consumer<List<MenuBean>>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void accept(List<MenuBean> menuBeans) throws Exception {
+                        // 这里接收数据项，相当于onNext
+                        for (MenuBean b : menuBeans) {
+                            Log.v("info", "----->" + b.getMenu());
+                        }
+                        mMainView.onLoadSuccess(menuBeans);
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void onError(Throwable e) {
+                    public void accept(Throwable throwable) throws Exception {
+                        // 这里接收onError
                         mMainView.onLoadFailed();
                     }
-
+                }, new Action() {
                     @Override
-                    public void onNext(List<MenuBean> menu) {
-                        mMainView.onLoadSuccess(menu);
+                    public void run() throws Exception {
+                        // 这里接收onComplete。
                     }
                 });
-        mSubscriptions.add(subscription);
+        mCompositeDisposable.add(disposable);
     }
 
     private Observable<List<MenuBean>> createObservable() {
-        Resources res = mContext.getResources();
-        final String[] resource = res.getStringArray(R.array.mennu);
-        return Observable.create(new Observable.OnSubscribe<List<MenuBean>>() {
+        final String[] resource = mContext.getResources().getStringArray(R.array.main_fun);
+
+        return Observable.create(new ObservableOnSubscribe<List<MenuBean>>() {
             @Override
-            public void call(Subscriber<? super List<MenuBean>> subscriber) {
+            public void subscribe(ObservableEmitter<List<MenuBean>> emitter) {
                 List<MenuBean> mData = new ArrayList<>();
                 for (int i = 0; i < resource.length; i++) {
-                    String aResource = resource[i];
-                    MenuBean bean = new MenuBean();
-                    bean.menu = aResource;
-                    bean.type = i;
-                    mData.add(bean);
+                    mData.add(new MenuBean(resource[i], i));
                 }
-                subscriber.onNext(mData);
-                subscriber.onCompleted();
+
+                emitter.onNext(mData);
+                emitter.onComplete();
             }
         });
     }

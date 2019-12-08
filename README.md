@@ -1,8 +1,11 @@
 # PLRecyclerView
-给自个儿用的RecyclerView，主要目的：
+给自个儿用的RecyclerView
 
-1. 练习Github和JCenter仓库的使用；
-2. 自己用；
+## Update 20191208
+1. gradle up to 5.4.1；
+2. 更新demo；
+3. 修改默认的几个layout，用dp代替sp；
+4. 下拉刷新后，支持手动刷新状态；
 
 ## Update 20181129
 1. compileSdkVersion up to 28

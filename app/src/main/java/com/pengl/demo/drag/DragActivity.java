@@ -13,21 +13,14 @@ import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.PLRecyclerView.SimpleItemTouchHelperCallback;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class DragActivity extends AppCompatActivity {
 
-    @BindView(R2.id.recycler)
     PLRecyclerView mRecycler;
-    @BindView(R2.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R2.id.content_item_drag)
     RelativeLayout mContentItemDrag;
 
     private boolean flag = false;
@@ -36,10 +29,8 @@ public class DragActivity extends AppCompatActivity {
     private DragAdapter mAdapter;
     private DragPresenter mPresenter;
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.drag_menu, menu);
         return true;
     }
@@ -53,9 +44,6 @@ public class DragActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch (id) {
@@ -97,9 +85,11 @@ public class DragActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drag);
-        ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
+        mContentItemDrag = findViewById(R.id.content_item_drag);
+        mRecycler = findViewById(R.id.recycler);
         mAdapter = new DragAdapter();
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);

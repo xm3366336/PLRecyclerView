@@ -3,10 +3,7 @@ package com.pengl.PLRecyclerView;
 import android.view.View;
 
 /**
- * Author: Season(ssseasonnn@gmail.com)
- * Date: 2016/9/26
- * Time: 15:11
- * FIXME
+ *
  */
 public abstract class ConfigureAdapter implements Configure {
 

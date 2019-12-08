@@ -9,17 +9,12 @@ import android.view.MenuItem;
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.Header;
 import com.pengl.demo.R;
-import com.pengl.demo.R2;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class SingleItemActivity extends AppCompatActivity {
 
-    @BindView(R2.id.recycler)
-    PLRecyclerView mRecycler;
+    private PLRecyclerView mRecycler;
 
     private boolean isNoMoreEnabled = false;
     private boolean isLoadMoreEnabled = false;
@@ -32,7 +27,6 @@ public class SingleItemActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -87,7 +81,7 @@ public class SingleItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item);
-        ButterKnife.bind(this);
+        mRecycler = findViewById(R.id.recycler);
 
         configurePresenter();
         configureRecyclerView();

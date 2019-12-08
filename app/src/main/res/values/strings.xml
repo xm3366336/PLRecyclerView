@@ -2,7 +2,7 @@
     <string name="app_name">PLRecyclerViewDemo</string>
     <string name="title_activity_main">MainActivity</string>
 
-    <string-array name="mennu">
+    <string-array name="main_fun">
         <item>SingleItem列表</item>
         <item>MultiItem列表</item>
         <item>Grid</item>
