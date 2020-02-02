@@ -15,9 +15,9 @@ import com.pengl.demo.R;
  */
 class NormalViewHolder extends AbstractViewHolder<NormalBean> {
 
-    ImageView mHead;
-    TextView mTitle;
-    TextView mContent;
+    private ImageView mHead;
+    private TextView mTitle;
+    private TextView mContent;
 
     private Context mContext;
 

@@ -7,7 +7,7 @@
     android:minHeight="48dip"
     android:orientation="horizontal">
 
-    <android.support.v4.widget.ContentLoadingProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
         android:gravity="center"
         android:text="@string/pl_rv_loading"
         android:textSize="13dip"

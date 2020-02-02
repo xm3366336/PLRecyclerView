@@ -1,9 +1,6 @@
 package com.pengl.demo.multipleitem;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -14,6 +11,10 @@ import com.pengl.demo.Header;
 import com.pengl.demo.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class MultiItemActivity extends AppCompatActivity {
 

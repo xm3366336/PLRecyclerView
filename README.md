@@ -1,6 +1,9 @@
 # PLRecyclerView
 给自个儿用的RecyclerView
 
+## Update 20200202
+1. 迁移至AndroidX；
+
 ## Update 20191208
 1. gradle up to 5.4.1；
 2. 更新demo；

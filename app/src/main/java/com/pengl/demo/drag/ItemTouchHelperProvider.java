@@ -1,6 +1,6 @@
 package com.pengl.demo.drag;
 
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 /**
  *

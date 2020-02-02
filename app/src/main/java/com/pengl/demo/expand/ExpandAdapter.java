@@ -25,9 +25,9 @@ class ExpandAdapter extends AbstractAdapter<ItemType, AbstractViewHolder> {
     @Override
     protected void onNewBindViewHolder(AbstractViewHolder holder, int position) {
         if (holder instanceof ParentViewHolder) {
-            holder.setData((ParentBean) get(position));
+            holder.setData(get(position));
         } else if (holder instanceof ChildViewHolder) {
-            holder.setData((ChildBean) get(position));
+            holder.setData(get(position));
         }
     }
 }

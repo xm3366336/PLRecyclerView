@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.pengl.PLRecyclerView.AbstractAdapter;
 import com.pengl.PLRecyclerView.AbstractViewHolder;
 import com.pengl.demo.R;
@@ -17,8 +16,8 @@ import java.util.List;
  */
 class ParentViewHolder extends AbstractViewHolder<ParentBean> implements View.OnClickListener {
 
-    TextView mText;
-    ImageView mImageView;
+    private TextView mText;
+    private ImageView mImageView;
 
     private ParentBean parent;
     private List<ChildBean> child;
@@ -46,11 +45,11 @@ class ParentViewHolder extends AbstractViewHolder<ParentBean> implements View.On
         if (parent.isExpand) {
             mAdapter.removeBack(getAdapterPosition(), child.size());
             parent.isExpand = false;
-            Glide.with(mImageView.getContext()).load(R.drawable.ic_keyboard_arrow_down).into(mImageView);
+            mImageView.setImageResource(R.drawable.ic_keyboard_arrow_down);
         } else {
             mAdapter.insertAllBack(getAdapterPosition(), child);
             parent.isExpand = true;
-            Glide.with(mImageView.getContext()).load(R.drawable.ic_keyboard_arrow_up).into(mImageView);
+            mImageView.setImageResource(R.drawable.ic_keyboard_arrow_up);
         }
     }
 }

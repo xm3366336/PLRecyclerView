@@ -44,7 +44,7 @@ class MultiItemPresenter {
     void loadData(final boolean isRefresh) {
         Disposable disposable = createObservable() //
                 .subscribeOn(Schedulers.io())//
-                .delay(2, TimeUnit.SECONDS)//
+                .delay(1, TimeUnit.SECONDS)//
                 .observeOn(AndroidSchedulers.mainThread())//
                 .subscribe(new Consumer<List<ItemType>>() {
                     @Override

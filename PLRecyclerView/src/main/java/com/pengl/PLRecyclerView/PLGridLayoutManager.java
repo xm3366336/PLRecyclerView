@@ -1,8 +1,9 @@
 package com.pengl.PLRecyclerView;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.util.AttributeSet;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 
 /**
  * 林北！！！先简单处理一下，解决几个越界的问题！！！

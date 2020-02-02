@@ -1,14 +1,15 @@
 package com.pengl.demo.expand;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 
 import com.pengl.PLRecyclerView.PLRecyclerView;
 import com.pengl.demo.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class ExpandActivity extends AppCompatActivity {
 

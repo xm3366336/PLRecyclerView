@@ -1,8 +1,6 @@
 package com.pengl.demo.singleitem;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,6 +9,9 @@ import com.pengl.demo.Header;
 import com.pengl.demo.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class SingleItemActivity extends AppCompatActivity {
 
