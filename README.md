@@ -1,6 +1,13 @@
 # PLRecyclerView
 给自个儿用的RecyclerView
 
+## Update 20200722
+1. 重新整理Demo；
+2. 去除ConfigureError和ConfigureEmpty接口，使用ConfigureAdapter替代；
+3. 插入或移除数据，做保护措施，避免越界；
+4. 标记一些过时方法，将在下个版本移除；
+5. ui稍做些调整；
+
 ## Update 20200202
 1. 迁移至AndroidX；
 
