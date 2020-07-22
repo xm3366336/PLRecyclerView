@@ -20,6 +20,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class SingleItemActivity extends BaseActivity {
@@ -40,7 +41,7 @@ public class SingleItemActivity extends BaseActivity {
             pageNum = 1;
             getData();
         });
-//        mRecycler.setLoadMoreListener(this::getData);
+        mRecycler.setLoadMoreListener(this::getData);
         mRecycler.configureView(new ConfigureAdapter() {
             @Override
             public void configureEmptyView(View emptyView) {
@@ -115,7 +116,7 @@ public class SingleItemActivity extends BaseActivity {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             SingleItemActivity activity = mActivity.get();
             if (null == activity) {
                 return;

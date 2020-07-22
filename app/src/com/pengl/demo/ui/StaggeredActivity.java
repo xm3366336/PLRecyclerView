@@ -4,15 +4,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.pengl.demo.viewHolder.ViewHeader;
 import com.pengl.demo.adapter.AdapterStagger;
 import com.pengl.demo.model.BeanStagger;
 import com.pengl.demo.utils.BaseActivity;
+import com.pengl.demo.viewHolder.ViewHeader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
@@ -54,7 +55,7 @@ public class StaggeredActivity extends BaseActivity {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             StaggeredActivity activity = mActivity.get();
             if (null == activity) {
                 return;
@@ -63,7 +64,6 @@ public class StaggeredActivity extends BaseActivity {
             if (activity.pageNum == 1) {
                 activity.mAdapter.clear();
                 activity.mAdapter.addHeader(new ViewHeader());
-                // mAdapter.addFooter(new Header());
             }
 
             int currCount = activity.mAdapter.getDataSize();

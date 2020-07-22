@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class EmptyActivity extends BaseActivity {
@@ -53,7 +54,7 @@ public class EmptyActivity extends BaseActivity {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             EmptyActivity activity = mActivity.get();
             if (null == activity) {
                 return;

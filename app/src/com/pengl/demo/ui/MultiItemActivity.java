@@ -5,16 +5,17 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.pengl.PLRecyclerView.ItemType;
-import com.pengl.demo.viewHolder.ViewHeader;
 import com.pengl.demo.adapter.AdapterMultiItem;
 import com.pengl.demo.model.BeanTypeOne;
 import com.pengl.demo.model.BeanTypeTwo;
 import com.pengl.demo.utils.BaseActivity;
+import com.pengl.demo.viewHolder.ViewHeader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class MultiItemActivity extends BaseActivity {
@@ -53,7 +54,7 @@ public class MultiItemActivity extends BaseActivity {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             MultiItemActivity activity = mActivity.get();
             if (null == activity) {
                 return;

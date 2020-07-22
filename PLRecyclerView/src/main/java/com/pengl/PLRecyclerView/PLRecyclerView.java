@@ -35,7 +35,6 @@ public class PLRecyclerView extends FrameLayout {
     private OnRefreshListener mRefreshListener;
     private OnLoadMoreListener mLoadMoreListener;
 
-    private FrameLayout mMainContainer;
     private FrameLayout mLoadingContainer;
     private FrameLayout mErrorContainer;
     private FrameLayout mEmptyContainer;
@@ -405,7 +404,7 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     private void initMainView(Context context) {
-        mMainContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.pl_rv_layout, this, true);
+        View mMainContainer = LayoutInflater.from(context).inflate(R.layout.pl_rv_layout, this, true);
         mLoadingContainer = mMainContainer.findViewById(R.id.pl_rv_loading);
         mErrorContainer = mMainContainer.findViewById(R.id.pl_rv_error);
         mEmptyContainer = mMainContainer.findViewById(R.id.pl_rv_empty);
@@ -487,9 +486,9 @@ public class PLRecyclerView extends FrameLayout {
         mLoadingView = LayoutInflater.from(context).inflate(loadingResId, mLoadingContainer, true);
         mEmptyView = LayoutInflater.from(context).inflate(emptyResId, mEmptyContainer, true);
         mErrorView = LayoutInflater.from(context).inflate(errorResId, mErrorContainer, true);
-        mLoadMoreView = LayoutInflater.from(context).inflate(loadMoreResId, mMainContainer, false);
-        mNoMoreView = LayoutInflater.from(context).inflate(noMoreResId, mMainContainer, false);
-        mLoadMoreFailedView = LayoutInflater.from(context).inflate(loadMoreErrorResId, mMainContainer, false);
+        mLoadMoreView = LayoutInflater.from(context).inflate(loadMoreResId, this, false);
+        mNoMoreView = LayoutInflater.from(context).inflate(noMoreResId, this, false);
+        mLoadMoreFailedView = LayoutInflater.from(context).inflate(loadMoreErrorResId, this, false);
 
         attributes.recycle();
     }
