@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:minHeight="48dip"
+    android:padding="32dip"
     android:text="@string/pl_rv_load_more_failed"
-    android:textSize="16dip"
+    android:textSize="14dip"
     tools:ignore="SpUsage" />

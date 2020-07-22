@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">PLRecyclerViewDemo</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_empty">EmptyActivity</string>
+    <string name="title_activity_error">ErrorActivity</string>
+    <string name="title_activity_single_item">SingleItemActivity</string>
+    <string name="title_activity_multi_item">MultiItemActivity</string>
+    <string name="title_activity_grid">GridActivity</string>
+    <string name="title_activity_staggered">StaggeredActivity</string>
+    <string name="title_activity_manual_load_more">ManualLoadMoreActivity</string>
+    <string name="title_activity_expand">ExpandActivity</string>
+    <string name="title_activity_item_drag">ItemDragActivity</string>
+
+    <string name="action_no_more_enable">关闭NoMoreView</string>
+    <string name="action_load_more_failed_enable">关闭LoadMoreFailedView</string>
+    <string name="click_to_load">点击加载下一页</string>
+
+    <string name="action_edit">编辑</string>
+    <string name="action_grid">表格</string>
+
+    <string name="action_opt_insert">在第5项的前面插1条</string>
+    <string name="action_opt_insert_back">在第5项的后面插1条</string>
+    <string name="action_opt_remove">删除第5项</string>
+    <string name="action_opt_remove_multi">从第5项起，删除2条</string>
+
+    <string name="version">v%1$s\nBuild:%2$d</string>
+    <string name="github_url">https://github.com/xm3366336/PLRecyclerView</string>
+</resources>

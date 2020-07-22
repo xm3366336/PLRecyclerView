@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Observable;
@@ -40,7 +39,6 @@ public class PLRecyclerView extends FrameLayout {
     private FrameLayout mLoadingContainer;
     private FrameLayout mErrorContainer;
     private FrameLayout mEmptyContainer;
-    private LinearLayout mContentContainer;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -94,20 +92,6 @@ public class PLRecyclerView extends FrameLayout {
         configure.configureLoadMoreView(mLoadMoreView);
         configure.configureNoMoreView(mNoMoreView);
         configure.configureLoadMoreFailedView(mLoadMoreFailedView);
-    }
-
-    public void configureEmptyView(ConfigureEmpty configure) {
-        if (configure == null) {
-            return;
-        }
-        configure.configureEmptyView(mEmptyView);
-    }
-
-    public void configureErrorView(ConfigureError configure) {
-        if (configure == null) {
-            return;
-        }
-        configure.configureErrorView(mErrorView);
     }
 
     public RecyclerView get() {
@@ -165,9 +149,12 @@ public class PLRecyclerView extends FrameLayout {
     /**
      * 显示或关闭LoadMoreView , 不建议使用
      * 注意, 仅仅只是不显示, 但仍会继续加载, 如需关闭自动加载功能, 请往上看
+     * 将在2.0.0版本后移除
      *
      * @param enabled true 为显示, false为不显示
+     * @deprecated 不建议使用，以后会去除
      */
+    @Deprecated
     public void setLoadMoreViewEnabled(boolean enabled) {
         mLoadMoreViewEnabled = enabled;
         if (!enabled) {
@@ -182,9 +169,12 @@ public class PLRecyclerView extends FrameLayout {
 
     /**
      * 显示或关闭LoadMoreFailedView, 不建议使用
+     * 将在2.0.0版本后移除
      *
      * @param enabled true 为显示, false为关闭
+     * @deprecated 不用了，出错时，请手工调用
      */
+    @Deprecated
     public void setLoadMoreFailedViewEnabled(boolean enabled) {
         mLoadMoreFailedViewEnabled = enabled;
         if (!enabled) {
@@ -199,9 +189,12 @@ public class PLRecyclerView extends FrameLayout {
 
     /**
      * 显示或关闭NoMoreView, 按需使用
+     * 将在2.0.0版本后移除
      *
      * @param enabled true为显示, false为关闭
+     * @deprecated 不用了，没有数据时，请手工调用 mAdapter.showNoMore()显示；
      */
+    @Deprecated
     public void setNoMoreViewEnabled(boolean enabled) {
         mNoMoreViewEnabled = enabled;
         if (!enabled) {
@@ -214,26 +207,75 @@ public class PLRecyclerView extends FrameLayout {
         }
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param hasFixedSize hasFixedSize
+     * @deprecated get().setHasFixedSize(hasFixedSize);
+     */
+    @Deprecated
     public void setHasFixedSize(boolean hasFixedSize) {
         mRecyclerView.setHasFixedSize(hasFixedSize);
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param position position
+     * @deprecated get().smoothScrollToPosition(position);
+     */
+    @Deprecated
     public void smoothScrollToPosition(int position) {
         mRecyclerView.smoothScrollToPosition(position);
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param animator animator
+     * @deprecated get().setItemAnimator(animator);
+     */
+    @Deprecated
     public void setItemAnimator(RecyclerView.ItemAnimator animator) {
         mRecyclerView.setItemAnimator(animator);
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param itemDecoration itemDecoration
+     * @deprecated get().addItemDecoration(itemDecoration);
+     */
+    @Deprecated
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
         mRecyclerView.addItemDecoration(itemDecoration);
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param itemDecoration itemDecoration
+     * @param index          index
+     * @deprecated get().addItemDecoration(itemDecoration, index);
+     */
+    @Deprecated
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration, int index) {
         mRecyclerView.addItemDecoration(itemDecoration, index);
     }
 
+    /**
+     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
+     * 将在2.0.0版本后移除
+     *
+     * @param decor decor
+     * @deprecated get().removeItemDecoration(decor);
+     */
+    @Deprecated
     public void removeItemDecoration(RecyclerView.ItemDecoration decor) {
         mRecyclerView.removeItemDecoration(decor);
     }
@@ -247,7 +289,7 @@ public class PLRecyclerView extends FrameLayout {
 
     void displayLoadingAndResetStatus() {
         mErrorContainer.setVisibility(GONE);
-        mContentContainer.setVisibility(GONE);
+        mRecyclerView.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
         mLoadingContainer.setVisibility(VISIBLE);
         resetStatus();
@@ -257,13 +299,13 @@ public class PLRecyclerView extends FrameLayout {
         mLoadingContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
-        mContentContainer.setVisibility(VISIBLE);
+        mRecyclerView.setVisibility(VISIBLE);
         resetStatus();
     }
 
     void displayEmptyAndResetStatus(int resId, String content) {
         mLoadingContainer.setVisibility(GONE);
-        mContentContainer.setVisibility(GONE);
+        mRecyclerView.setVisibility(GONE);
         mErrorContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(VISIBLE);
 
@@ -284,7 +326,7 @@ public class PLRecyclerView extends FrameLayout {
 
     void displayErrorAndResetStatus(int resId, String error) {
         mLoadingContainer.setVisibility(GONE);
-        mContentContainer.setVisibility(GONE);
+        mRecyclerView.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(VISIBLE);
 
@@ -364,18 +406,17 @@ public class PLRecyclerView extends FrameLayout {
 
     private void initMainView(Context context) {
         mMainContainer = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.pl_rv_layout, this, true);
-        mLoadingContainer = mMainContainer.findViewById(R.id.practical_loading);
-        mErrorContainer = mMainContainer.findViewById(R.id.practical_error);
-        mEmptyContainer = mMainContainer.findViewById(R.id.practical_empty);
-        mContentContainer = mMainContainer.findViewById(R.id.practical_content);
+        mLoadingContainer = mMainContainer.findViewById(R.id.pl_rv_loading);
+        mErrorContainer = mMainContainer.findViewById(R.id.pl_rv_error);
+        mEmptyContainer = mMainContainer.findViewById(R.id.pl_rv_empty);
 
-        mSwipeRefreshLayout = mMainContainer.findViewById(R.id.practical_swipe_refresh);
-        mRecyclerView = mMainContainer.findViewById(R.id.practical_recycler);
+        mSwipeRefreshLayout = mMainContainer.findViewById(R.id.pl_rv_swipe_refresh);
+        mRecyclerView = mMainContainer.findViewById(R.id.pl_rv_recycler);
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.material_colors));
     }
 
     private void configDefaultBehavior() {
-        //默认为关闭,设置OnRefreshListener时打开
+        // 默认为关闭,设置OnRefreshListener时打开
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -383,10 +424,9 @@ public class PLRecyclerView extends FrameLayout {
                 refresh();
             }
         });
-
         mRecyclerView.addOnScrollListener(mScrollListener);
 
-        //设置error view 默认行为,点击刷新
+        // 设置error view 默认行为,点击刷新
         mErrorView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -394,7 +434,8 @@ public class PLRecyclerView extends FrameLayout {
                 refresh();
             }
         });
-        //设置load more failed view 默认行为, 点击恢复加载
+
+        // 设置load more failed view 默认行为, 点击恢复加载
         mLoadMoreFailedView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -439,7 +480,6 @@ public class PLRecyclerView extends FrameLayout {
         int loadingResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_loading_layout, R.layout.pl_rv_loading_layout);
         int emptyResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_empty_layout, R.layout.pl_rv_empty_layout);
         int errorResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_error_layout, R.layout.pl_rv_error_layout);
-
         int loadMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_load_more_layout, R.layout.pl_rv_load_more_layout);
         int noMoreResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_no_more_layout, R.layout.pl_rv_no_more_layout);
         int loadMoreErrorResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_load_more_failed_layout, R.layout.pl_rv_load_more_failed_layout);
@@ -447,7 +487,6 @@ public class PLRecyclerView extends FrameLayout {
         mLoadingView = LayoutInflater.from(context).inflate(loadingResId, mLoadingContainer, true);
         mEmptyView = LayoutInflater.from(context).inflate(emptyResId, mEmptyContainer, true);
         mErrorView = LayoutInflater.from(context).inflate(errorResId, mErrorContainer, true);
-
         mLoadMoreView = LayoutInflater.from(context).inflate(loadMoreResId, mMainContainer, false);
         mNoMoreView = LayoutInflater.from(context).inflate(noMoreResId, mMainContainer, false);
         mLoadMoreFailedView = LayoutInflater.from(context).inflate(loadMoreErrorResId, mMainContainer, false);
@@ -483,7 +522,7 @@ public class PLRecyclerView extends FrameLayout {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            //当滚动到最后一个item时,自动加载更多
+            // 当滚动到最后一个item时,自动加载更多
             if (isLastItem(recyclerView)) {
                 autoLoadMoreIfEnabled();
             }

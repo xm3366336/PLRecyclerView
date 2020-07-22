@@ -106,8 +106,12 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param item            插入的数据
      */
     public void insert(int adapterPosition, T item) {
-        dataSet.data.insert(adapterPosition, item);
-        notifyItemInserted(adapterPosition);
+        if (dataSet.data.size() <= adapterPosition) {
+            add(item);
+        } else {
+            dataSet.data.insert(adapterPosition, item);
+            notifyItemInserted(adapterPosition);
+        }
     }
 
     /**
@@ -117,19 +121,27 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param items           插入的数据
      */
     public void insertAll(int adapterPosition, List<? extends T> items) {
-        dataSet.data.insertAll(adapterPosition, items);
-        notifyItemRangeInserted(adapterPosition, items.size());
+        if (dataSet.data.size() <= adapterPosition) {
+            addAll(items);
+        } else {
+            dataSet.data.insertAll(adapterPosition, items);
+            notifyItemRangeInserted(adapterPosition, items.size());
+        }
     }
 
     /**
      * 插入数据到position之后
      *
-     * @param adapterPosition position
+     * @param adapterPosition position 从0开始，含header的条数
      * @param item            插入的数据
      */
     public void insertBack(int adapterPosition, T item) {
-        dataSet.data.insertBack(adapterPosition, item);
-        notifyItemInserted(adapterPosition + 1);
+        if (dataSet.data.size() <= adapterPosition) {
+            add(item);
+        } else {
+            dataSet.data.insertBack(adapterPosition, item);
+            notifyItemInserted(adapterPosition + 1);
+        }
     }
 
     /**
@@ -151,20 +163,30 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     /**
      * 正常的删除
      *
-     * @param adapterPosition 待删除的位置
+     * @param adapterPosition 待删除的位置 从0开始，含header的条数
      */
     public void remove(int adapterPosition) {
+        if (dataSet.data.size() < adapterPosition) {
+            return;
+        }
         dataSet.data.remove(adapterPosition);
         notifyItemRemoved(adapterPosition);
     }
 
     /**
      * 从指定的position之后删除size个数据
+     * 不含position
      *
-     * @param adapterPosition position
+     * @param adapterPosition position 从0开始，含header的条数
      * @param removeSize      删除的数据大小
      */
     public void removeBack(int adapterPosition, int removeSize) {
+        if (dataSet.data.size() <= adapterPosition) {
+            return;
+        }
+        if (dataSet.data.size() <= adapterPosition + removeSize) {
+            return;
+        }
         dataSet.data.removeAllBack(adapterPosition, removeSize);
         notifyItemRangeRemoved(adapterPosition + 1, removeSize);
     }
@@ -194,9 +216,9 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
-     * The method to judge whether the position is the header.
+     * 该position是否为Header
      *
-     * @return true if is header, otherwise false.
+     * @return true是
      */
     public boolean isHeader(int position) {
         return dataSet.header.is(position);
@@ -306,7 +328,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     /**
-     * 恢复LoadMore
+     * 恢复LoadMore，加载更多
      */
     public void resumeLoadMore() {
         dataSet.notifyResumeLoadMore();
@@ -350,8 +372,8 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
 
     @Override
     public final int getItemViewType(int position) {
-        //用header和footer的HashCode表示它们的ItemType,
-        //普通类型的数据由该数据类型的ItemType决定
+        // 用header和footer的HashCode表示它们的ItemType,
+        // 普通类型的数据由该数据类型的ItemType决定
         if (dataSet.header.is(position)) {
             return dataSet.header.get(position).hashCode();
         } else if (dataSet.data.is(position)) {
@@ -373,7 +395,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         super.onViewAttachedToWindow(holder);
         int position = holder.getAdapterPosition();
 
-        //瀑布流的 Header Footer 宽度处理
+        // 瀑布流的 Header Footer 宽度处理
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
         if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
@@ -382,9 +404,10 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
             }
         }
 
-        //判断是否需要自动加载
+        // 判断是否需要自动加载
         if (mRecyclerView.getScrollState() != SCROLL_STATE_IDLE)
             return;
+
         if (dataSet.extra.size() == 0) {
             if (position == dataSet.totalSize() - 1) {
                 loadMore();
@@ -401,7 +424,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         super.onAttachedToRecyclerView(recyclerView);
         mRecyclerView = recyclerView;
 
-        //Grid的 Header Footer 宽度处理
+        // Grid的 Header Footer 宽度处理
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);

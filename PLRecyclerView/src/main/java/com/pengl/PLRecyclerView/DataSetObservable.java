@@ -44,7 +44,6 @@ class DataSetObservable<E> extends Observable {
         mHeader.clear();
         mData.clear();
         mFooter.clear();
-//        mExtra.clear();
     }
 
     void notifyLoading() {

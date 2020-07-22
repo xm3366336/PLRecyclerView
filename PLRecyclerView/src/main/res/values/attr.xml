@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PLRecyclerView">
-        <attr name="pl_rv_empty_layout" format="reference"/>
-        <attr name="pl_rv_error_layout" format="reference"/>
-        <attr name="pl_rv_loading_layout" format="reference"/>
-        <attr name="pl_rv_load_more_layout" format="reference"/>
-        <attr name="pl_rv_no_more_layout" format="reference"/>
-        <attr name="pl_rv_load_more_failed_layout" format="reference"/>
+        <!-- 没有数据时，显示的layout -->
+        <attr name="pl_rv_empty_layout" format="reference" />
+        <!-- 出错时，显示的layout -->
+        <attr name="pl_rv_error_layout" format="reference" />
+        <!-- 加载中，显示的layout -->
+        <attr name="pl_rv_loading_layout" format="reference" />
+        <!-- 加载下一页时，底部显示的layout -->
+        <attr name="pl_rv_load_more_layout" format="reference" />
+        <!-- 全部加载完了，底部显示的layout -->
+        <attr name="pl_rv_no_more_layout" format="reference" />
+        <!-- 加载下一页时，出错了，显示的layout -->
+        <attr name="pl_rv_load_more_failed_layout" format="reference" />
     </declare-styleable>
 
 </resources>

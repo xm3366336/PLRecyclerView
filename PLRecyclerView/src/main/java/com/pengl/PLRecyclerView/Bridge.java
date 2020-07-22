@@ -7,7 +7,6 @@ interface Bridge {
     void doSomething(PLRecyclerView host);
 
     class Loading implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.displayLoadingAndResetStatus();
@@ -30,7 +29,6 @@ interface Bridge {
     }
 
     class Content implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.displayContentAndResetStatus();
@@ -38,7 +36,6 @@ interface Bridge {
     }
 
     class Error implements Bridge {
-
         private int resId;
         private String err;
 
@@ -54,7 +51,6 @@ interface Bridge {
     }
 
     class NoMore implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.showNoMoreIfEnabled();
@@ -62,7 +58,6 @@ interface Bridge {
     }
 
     class LoadMoreFailed implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.showLoadMoreFailedIfEnabled();
@@ -70,7 +65,6 @@ interface Bridge {
     }
 
     class ResumeLoadMore implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.resumeLoadMoreIfEnabled();
@@ -78,7 +72,6 @@ interface Bridge {
     }
 
     class AutoLoadMore implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.autoLoadMoreIfEnabled();
@@ -86,7 +79,6 @@ interface Bridge {
     }
 
     class ManualLoadMore implements Bridge {
-
         @Override
         public void doSomething(PLRecyclerView host) {
             host.manualLoadMoreIfEnabled();
