@@ -7,4 +7,5 @@
 .idea/
 /gradle.properties
 /PLRecyclerview/gradle.properties
-
+/app/release
+PL.keystore
