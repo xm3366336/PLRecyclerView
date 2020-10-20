@@ -13,18 +13,17 @@ public class Common {
     public static String getRandom(int iRdLength) {
         Random rd = new Random();
         int iRd = rd.nextInt();
-        if (iRd < 0) { // 负数时转换为正数
+        if (iRd < 0) {
             iRd *= -1;
         }
         String sRd = String.valueOf(iRd);
         int iLgth = sRd.length();
-        if (iRdLength > iLgth) { // 获取数长度超过随机数长度
-            // 将整数转化为一个n位的字符串
+        if (iRdLength > iLgth) {
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < iRdLength - String.valueOf(iRd).length(); i++) {
                 result.append("0");
             }
-            result.append(String.valueOf(iRd));
+            result.append(iRd);
             return result.toString();
         } else {
             return sRd.substring(iLgth - iRdLength, iLgth);

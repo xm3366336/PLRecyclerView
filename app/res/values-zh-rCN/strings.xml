@@ -1,0 +1,50 @@
+<resources>
+
+    <string name="app_name" translatable="false">PLRecyclerViewDemo</string>
+    <string name="version">v%1$s\nBuild:%2$d</string>
+    <string name="github_url">https://github.com/xm3366336/PLRecyclerView</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_empty">EmptyActivity</string>
+    <string name="title_activity_error">ErrorActivity</string>
+    <string name="title_activity_single_item">SingleItemActivity</string>
+    <string name="title_activity_multi_item">MultiItemActivity</string>
+    <string name="title_activity_grid">GridActivity</string>
+    <string name="title_activity_staggered">StaggeredActivity</string>
+    <string name="title_activity_manual_load_more">ManualLoadMoreActivity</string>
+    <string name="title_activity_expand">ExpandActivity</string>
+    <string name="title_activity_item_drag">ItemDragActivity</string>
+
+    <string-array name="main_fun_name">
+        <item>空状态</item>
+        <item>错误状态</item>
+        <item>SingleItem列表</item>
+        <item>MultiItem列表</item>
+        <item>Grid</item>
+        <item>瀑布流</item>
+        <item>手动触发加载更多</item>
+        <item>拖拽</item>
+        <item>ExpandItemList</item>
+    </string-array>
+
+    <string name="click_to_load">点击加载下一页</string>
+    <string name="tips_1">你想干啥都行</string>
+    <string name="tips_2">兄弟，接口出错了</string>
+
+    <string name="action_edit">编辑</string>
+    <string name="action_grid">表格</string>
+    <string name="action_save">保存</string>
+
+    <string name="action_opt_insert">在第5项的前面插1条</string>
+    <string name="action_opt_insert_back">在第5项的后面插1条</string>
+    <string name="action_opt_remove">删除第5项</string>
+    <string name="action_opt_remove_multi">从第5项起，删除2条</string>
+
+    <string name="seq_data_1">第%1$d个</string>
+    <string name="seq_data_2">这是第%1$d条数据</string>
+    <string name="seq_data_3">我是爹%1$d</string>
+    <string name="seq_data_4">我爹是%1$d，而我是%2$d</string>
+    <string name="seq_data_5">这是新插入的数据</string>
+    <string name="seq_data_6">这是一个随机数：%1$s</string>
+
+</resources>

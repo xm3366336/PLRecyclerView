@@ -89,10 +89,10 @@ public class SingleItemActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_opt_insert:
-                mAdapter.insert(5, new BeanNormal("这是新插入的数据", "This is the newly inserted data" + Common.getRandom(4)));
+                mAdapter.insert(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
                 break;
             case R.id.action_opt_insert_back:
-                mAdapter.insertBack(5, new BeanNormal("这是新插入的数据", "This is the newly inserted data" + Common.getRandom(4)));
+                mAdapter.insertBack(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
                 break;
             case R.id.action_opt_remove:
                 mAdapter.remove(5);
@@ -145,7 +145,8 @@ public class SingleItemActivity extends BaseActivity {
             List<BeanNormal> list = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 int position = i + 1 + currCount;
-                list.add(new BeanNormal("这是第" + position + "条数据", "This is the " + position + "th data"));
+                String str = activity.getString(R.string.seq_data_2, position);
+                list.add(new BeanNormal(str, str));
             }
 
             activity.mAdapter.addAll(list);

@@ -38,7 +38,7 @@ public class ErrorActivity extends BaseActivity {
             public void configureErrorView(View errorView) {
                 super.configureErrorView(errorView);
                 errorView.setOnClickListener(view -> {
-                    Toast.makeText(ErrorActivity.this, "你想干啥都行", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ErrorActivity.this, getString(R.string.tips_1), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -68,12 +68,13 @@ public class ErrorActivity extends BaseActivity {
                 activity.mAdapter.clear();
                 List<BeanNormal> list = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
-                    list.add(new BeanNormal("这是第" + i + "条数据", "This is the " + i + "th data"));
+                    String str = activity.getString(R.string.seq_data_2, i);
+                    list.add(new BeanNormal(str, str));
                 }
                 activity.mAdapter.addAll(list);
                 activity.mAdapter.showNoMore();
             } else {
-                activity.mAdapter.showError(R.mipmap.img_no_network, "兄弟，接口出错了");
+                activity.mAdapter.showError(R.mipmap.img_no_network, activity.getString(R.string.tips_2));
             }
         }
     }

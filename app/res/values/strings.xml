@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">PLRecyclerViewDemo</string>
+
+    <string name="app_name" translatable="false">PLRecyclerViewDemo</string>
+    <string name="version">v%1$s\nBuild:%2$d</string>
+    <string name="github_url">https://github.com/xm3366336/PLRecyclerView</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_empty">EmptyActivity</string>
@@ -12,18 +15,36 @@
     <string name="title_activity_expand">ExpandActivity</string>
     <string name="title_activity_item_drag">ItemDragActivity</string>
 
-    <string name="action_no_more_enable">关闭NoMoreView</string>
-    <string name="action_load_more_failed_enable">关闭LoadMoreFailedView</string>
-    <string name="click_to_load">点击加载下一页</string>
+    <string-array name="main_fun_name">
+        <item>EmptyActivity</item>
+        <item>ErrorActivity</item>
+        <item>SingleItemActivity</item>
+        <item>MultiItemActivity</item>
+        <item>GridActivity</item>
+        <item>StaggeredActivity</item>
+        <item>ManualLoadMoreActivity</item>
+        <item>DragActivity</item>
+        <item>ExpandActivity</item>
+    </string-array>
 
-    <string name="action_edit">编辑</string>
-    <string name="action_grid">表格</string>
+    <string name="click_to_load">Click to load the next page</string>
+    <string name="tips_1">Do whatever you want</string>
+    <string name="tips_2">something went wrong</string>
 
-    <string name="action_opt_insert">在第5项的前面插1条</string>
-    <string name="action_opt_insert_back">在第5项的后面插1条</string>
-    <string name="action_opt_remove">删除第5项</string>
-    <string name="action_opt_remove_multi">从第5项起，删除2条</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_grid">Grid</string>
+    <string name="action_save">Save</string>
 
-    <string name="version">v%1$s\nBuild:%2$d</string>
-    <string name="github_url">https://github.com/xm3366336/PLRecyclerView</string>
+    <string name="action_opt_insert">Insert 1 before item 5</string>
+    <string name="action_opt_insert_back">Insert 1 after item 5</string>
+    <string name="action_opt_remove">Delete item 5</string>
+    <string name="action_opt_remove_multi">From item 5, delete 2</string>
+
+    <string name="seq_data_1">%1$dth</string>
+    <string name="seq_data_2">This is the %1$dth data</string>
+    <string name="seq_data_3">I am father %1$d</string>
+    <string name="seq_data_4">My father is %1$d, and me is %2$d</string>
+    <string name="seq_data_5">This is the newly inserted data</string>
+    <string name="seq_data_6">This is a random number: %1$s</string>
+
 </resources>

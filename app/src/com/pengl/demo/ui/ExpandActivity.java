@@ -2,6 +2,7 @@ package com.pengl.demo.ui;
 
 import android.os.Bundle;
 
+import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterExpand;
 import com.pengl.demo.model.BeanExpandChild;
 import com.pengl.demo.model.BeanExpandParent;
@@ -28,10 +29,10 @@ public class ExpandActivity extends BaseActivity {
 
             List<BeanExpandChild> listChild = new ArrayList<>();
             for (int x = 0, childSize = Common.getRandom(1, 5); x < childSize; x++) {
-                listChild.add(new BeanExpandChild("我爹是" + (i + 1) + "，而我是" + (x + 1)));
+                listChild.add(new BeanExpandChild(getString(R.string.seq_data_4, (i + 1), (x + 1))));
             }
 
-            listParent.add(new BeanExpandParent("我是爹" + (i + 1), listChild, false));
+            listParent.add(new BeanExpandParent(getString(R.string.seq_data_3, (i + 1)), listChild, false));
         }
 
         mAdapter.clear();

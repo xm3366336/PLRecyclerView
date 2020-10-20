@@ -12,7 +12,6 @@ public enum RecyclerItemType {
     PARENT(4), //
     CHILD(5);  //
 
-    // 定义私有变量
     private int nCode;
 
     RecyclerItemType(int _nCode) {

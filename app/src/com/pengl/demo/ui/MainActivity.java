@@ -22,18 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String[] ARRAY_TITLE = new String[]{//
-            "空状态",//
-            "错误状态",//
-            "SingleItem列表",  //
-            "MultiItem列表",   //
-            "Grid", //
-            "瀑布流",  //
-            "手动触发加载更多",  //
-            "拖拽",            //
-            "ExpandItemList"
-    };
-
     private Class<?>[] ARRAY_CLASS = new Class<?>[]{//
             EmptyActivity.class,//
             ErrorActivity.class,//
@@ -57,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
+        String[] ARRAY_TITLE = getResources().getStringArray(R.array.main_fun_name);
         List<BeanMainFun> mData = new ArrayList<>();
         for (int i = 0, size = ARRAY_TITLE.length; i < size; i++) {
             mData.add(new BeanMainFun(ARRAY_TITLE[i], ARRAY_CLASS[i]));

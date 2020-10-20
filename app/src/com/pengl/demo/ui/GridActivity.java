@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterGrid;
 import com.pengl.demo.model.BeanGrid;
 import com.pengl.demo.utils.BaseActivity;
@@ -66,7 +67,7 @@ public class GridActivity extends BaseActivity {
             List<BeanGrid> list = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 int position = i + 1 + currCount;
-                list.add(new BeanGrid("这是第" + position + "个"));
+                list.add(new BeanGrid(activity.getString(R.string.seq_data_1, position)));
             }
 
             activity.mAdapter.addAll(list);

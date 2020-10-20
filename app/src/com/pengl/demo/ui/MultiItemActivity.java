@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.pengl.PLRecyclerView.ItemType;
+import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterMultiItem;
 import com.pengl.demo.model.BeanTypeOne;
 import com.pengl.demo.model.BeanTypeTwo;
@@ -70,9 +71,9 @@ public class MultiItemActivity extends BaseActivity {
             for (int i = 0; i < 10; i++) {
                 int position = i + 1 + currCount;
                 if (position % 3 == 0) {
-                    list.add(new BeanTypeTwo("这是第" + position + "条数据"));
+                    list.add(new BeanTypeTwo(activity.getString(R.string.seq_data_2, position)));
                 } else {
-                    list.add(new BeanTypeOne("这是第" + position + "条数据"));
+                    list.add(new BeanTypeOne(activity.getString(R.string.seq_data_2, position)));
                 }
             }
 

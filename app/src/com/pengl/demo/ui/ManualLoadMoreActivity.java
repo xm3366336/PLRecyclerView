@@ -112,7 +112,8 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
             List<BeanNormal> list = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 int position = i + 1 + currCount;
-                list.add(new BeanNormal("这是第" + position + "条数据", "This is the " + position + "th data"));
+                String str = activity.getString(R.string.seq_data_2, position);
+                list.add(new BeanNormal(str, str));
             }
 
             activity.mAdapter.addAll(list);

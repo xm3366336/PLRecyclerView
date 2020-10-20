@@ -46,9 +46,9 @@ public class DragActivity extends BaseActivity {
             case R.id.action_edit:
                 flag = !flag;
                 if (flag) {
-                    item.setTitle("保存");
+                    item.setTitle(getString(R.string.action_save));
                 } else {
-                    item.setTitle("编辑");
+                    item.setTitle(getString(R.string.action_edit));
                 }
 
                 // 点击编辑显示拖动图标
@@ -96,7 +96,7 @@ public class DragActivity extends BaseActivity {
     private void getData() {
         List<BeanDrag> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new BeanDrag("第" + (i + 1) + "个"));
+            list.add(new BeanDrag(getString(R.string.seq_data_1, (i + 1))));
         }
         mAdapter.clear();
         mAdapter.addAll(list);

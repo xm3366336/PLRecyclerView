@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.pengl.PLRecyclerView.ConfigureAdapter;
+import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;
 import com.pengl.demo.utils.BaseActivity;
@@ -35,7 +36,7 @@ public class EmptyActivity extends BaseActivity {
         mRecycler.configureView(new ConfigureAdapter() {
             @Override
             public void configureEmptyView(View emptyView) {
-                emptyView.setOnClickListener(view -> Toast.makeText(EmptyActivity.this, "你想干啥都行", Toast.LENGTH_SHORT).show());
+                emptyView.setOnClickListener(view -> Toast.makeText(EmptyActivity.this, getString(R.string.tips_1), Toast.LENGTH_SHORT).show());
             }
         });
 
@@ -64,7 +65,8 @@ public class EmptyActivity extends BaseActivity {
                 activity.mAdapter.clear();
                 List<BeanNormal> list = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
-                    list.add(new BeanNormal("这是第" + i + "条数据", "This is the " + i + "th data"));
+                    String str = activity.getString(R.string.seq_data_2, i);
+                    list.add(new BeanNormal(str, str));
                 }
                 activity.mAdapter.addAll(list);
                 activity.mAdapter.showNoMore();

@@ -11,7 +11,7 @@ public class BeanExpandParent implements ItemType {
 
     private String text;
     private List<BeanExpandChild> ChildList;
-    private boolean isExpand;// 是否展开
+    private boolean isExpand;
 
     public BeanExpandParent() {
     }

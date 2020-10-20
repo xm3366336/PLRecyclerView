@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="pl_rv_empty">没有数据</string>
+    <string name="pl_rv_error">网络连接失败，请点击重试</string>
+    <string name="pl_rv_no_more">加载完毕</string>
+    <string name="pl_rv_load_more_failed">加载失败，点击重试</string>
+    <string name="pl_rv_loading">加载中…</string>
+
+</resources>
