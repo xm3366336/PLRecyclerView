@@ -2,7 +2,7 @@ package com.pengl.demo.adapter;
 
 import android.view.ViewGroup;
 
-import com.pengl.PLRecyclerView.AbstractAdapter;
+import com.pengl.AbstractAdapter;
 import com.pengl.demo.model.BeanDrag;
 import com.pengl.demo.viewHolder.ViewHolderDrag;
 

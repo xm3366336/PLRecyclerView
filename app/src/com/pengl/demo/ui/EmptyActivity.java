@@ -6,7 +6,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
-import com.pengl.PLRecyclerView.ConfigureAdapter;
+import com.pengl.ConfigureAdapter;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;

@@ -3,7 +3,7 @@ package com.pengl.demo.utils;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.PLRecyclerView;
 import com.pengl.demo.R;
 
 import java.util.Objects;

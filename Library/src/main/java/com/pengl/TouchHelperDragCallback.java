@@ -1,4 +1,4 @@
-package com.pengl.PLRecyclerView;
+package com.pengl;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  *
  */
-public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
+public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
 
-    private boolean isLongPressDragEnabled;
-    private boolean isSwipeEnabled;
+    private final boolean isLongPressDragEnabled;
+    private final boolean isSwipeEnabled;
     private AbstractAdapter mAdapter;
 
     /**
@@ -21,7 +21,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
      * @param isLongPressDragEnabled 是否启用默认的长按拖动
      * @param isSwipeEnabled         是否启用默认的滑动删除
      */
-    public SimpleItemTouchHelperCallback(boolean isLongPressDragEnabled, boolean isSwipeEnabled) {
+    public TouchHelperDragCallback(boolean isLongPressDragEnabled, boolean isSwipeEnabled) {
         this.isLongPressDragEnabled = isLongPressDragEnabled;
         this.isSwipeEnabled = isSwipeEnabled;
     }

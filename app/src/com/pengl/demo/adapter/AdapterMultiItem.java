@@ -2,9 +2,9 @@ package com.pengl.demo.adapter;
 
 import android.view.ViewGroup;
 
-import com.pengl.PLRecyclerView.AbstractAdapter;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
-import com.pengl.PLRecyclerView.ItemType;
+import com.pengl.AbstractAdapter;
+import com.pengl.AbstractViewHolder;
+import com.pengl.ItemType;
 import com.pengl.demo.model.RecyclerItemType;
 import com.pengl.demo.model.BeanTypeOne;
 import com.pengl.demo.model.BeanTypeTwo;

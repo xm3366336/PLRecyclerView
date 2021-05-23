@@ -3,7 +3,7 @@ package com.pengl.demo.viewHolder;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pengl.PLRecyclerView.AbstractViewHolder;
+import com.pengl.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.model.BeanStagger;
 

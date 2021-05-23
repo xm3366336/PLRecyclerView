@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.xm3366336'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -9,6 +12,7 @@ android {
         versionCode rootProject.versionCode
         versionName rootProject.versionName
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -18,9 +22,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }
-
-apply from: "bintrayUpload.gradle"

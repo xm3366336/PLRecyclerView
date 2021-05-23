@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pengl.PLRecyclerView.AbstractAdapter;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
+import com.pengl.AbstractAdapter;
+import com.pengl.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterExpand;
 import com.pengl.demo.model.BeanExpandChild;

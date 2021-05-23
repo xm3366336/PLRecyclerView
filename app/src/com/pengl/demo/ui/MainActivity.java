@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pengl.PLRecyclerView.AbstractAdapter;
-import com.pengl.PLRecyclerView.AbstractViewHolder;
-import com.pengl.PLRecyclerView.PLLinearLayoutManager;
-import com.pengl.PLRecyclerView.PLRecyclerView;
+import com.pengl.AbstractAdapter;
+import com.pengl.AbstractViewHolder;
+import com.pengl.PLLinearLayoutManager;
+import com.pengl.PLRecyclerView;
 import com.pengl.demo.R;
 import com.pengl.demo.model.BeanMainFun;
 import com.pengl.demo.viewHolder.ViewFooter;

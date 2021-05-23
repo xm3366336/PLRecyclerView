@@ -1,4 +1,4 @@
-package com.pengl.PLRecyclerView;
+package com.pengl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ class DataSetObservable<E> extends Observable {
     Segment<SectionItem> footer = new FooterSegment();
     Segment<SectionItem> extra = new ExtraSegment();
 
-    private List<SectionItem> mHeader = new ArrayList<>();
-    private List<E> mData = new ArrayList<>();
-    private List<SectionItem> mFooter = new ArrayList<>();
-    private List<SectionItem> mExtra = new ArrayList<>();
+    private final List<SectionItem> mHeader = new ArrayList<>();
+    private final List<E> mData = new ArrayList<>();
+    private final List<SectionItem> mFooter = new ArrayList<>();
+    private final List<SectionItem> mExtra = new ArrayList<>();
 
     //------------------------------
     //|position    size     item   |
@@ -96,7 +96,7 @@ class DataSetObservable<E> extends Observable {
         super.notifyObservers(new Bridge.SwipeConflicts(enabled));
     }
 
-    abstract class Segment<T> {
+    abstract static class Segment<T> {
 
         /**
          * 正常的插入

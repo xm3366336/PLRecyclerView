@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pengl.PLRecyclerView.SectionItem;
+import com.pengl.SectionItem;
 import com.pengl.demo.R;
 
 import androidx.appcompat.widget.AppCompatImageView;

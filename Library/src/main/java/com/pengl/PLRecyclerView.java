@@ -1,4 +1,4 @@
-package com.pengl.PLRecyclerView;
+package com.pengl;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.pengl.library.R;
 
 /**
  *
@@ -55,8 +57,8 @@ public class PLRecyclerView extends FrameLayout {
     private boolean noMore = false;
     private boolean loadMoreFailed = false;
 
-    private OnScrollListener mScrollListener = new OnScrollListener();
-    private DataSetObserver mObserver = new DataSetObserver();
+    private final OnScrollListener mScrollListener = new OnScrollListener();
+    private final DataSetObserver mObserver = new DataSetObserver();
 
     public PLRecyclerView(Context context) {
         this(context, null);
@@ -161,7 +163,9 @@ public class PLRecyclerView extends FrameLayout {
         } else {
             if (mScrollListener.isLastItem(mRecyclerView)) {
                 autoLoadMoreIfEnabled();
-                smoothScrollToPosition(mRecyclerView.getLayoutManager().getItemCount() - 1);
+                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
+                if (null != lm)
+                    get().smoothScrollToPosition(lm.getItemCount() - 1);
             }
         }
     }
@@ -181,7 +185,9 @@ public class PLRecyclerView extends FrameLayout {
         } else {
             if (loadMoreFailed) {
                 displayLoadMoreFailedViewOrDisappear();
-                smoothScrollToPosition(mRecyclerView.getLayoutManager().getItemCount() - 1);
+                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
+                if (null != lm)
+                    get().smoothScrollToPosition(lm.getItemCount() - 1);
             }
         }
     }
@@ -201,82 +207,11 @@ public class PLRecyclerView extends FrameLayout {
         } else {
             if (noMore) {
                 displayNoMoreViewOrDisappear();
-                smoothScrollToPosition(mRecyclerView.getLayoutManager().getItemCount() - 1);
+                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
+                if (null != lm)
+                    get().smoothScrollToPosition(lm.getItemCount() - 1);
             }
         }
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param hasFixedSize hasFixedSize
-     * @deprecated get().setHasFixedSize(hasFixedSize);
-     */
-    @Deprecated
-    public void setHasFixedSize(boolean hasFixedSize) {
-        mRecyclerView.setHasFixedSize(hasFixedSize);
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param position position
-     * @deprecated get().smoothScrollToPosition(position);
-     */
-    @Deprecated
-    public void smoothScrollToPosition(int position) {
-        mRecyclerView.smoothScrollToPosition(position);
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param animator animator
-     * @deprecated get().setItemAnimator(animator);
-     */
-    @Deprecated
-    public void setItemAnimator(RecyclerView.ItemAnimator animator) {
-        mRecyclerView.setItemAnimator(animator);
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param itemDecoration itemDecoration
-     * @deprecated get().addItemDecoration(itemDecoration);
-     */
-    @Deprecated
-    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
-        mRecyclerView.addItemDecoration(itemDecoration);
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param itemDecoration itemDecoration
-     * @param index          index
-     * @deprecated get().addItemDecoration(itemDecoration, index);
-     */
-    @Deprecated
-    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration, int index) {
-        mRecyclerView.addItemDecoration(itemDecoration, index);
-    }
-
-    /**
-     * RecyclerView原生的方法，请使用get()获取到RecyclerView再操作
-     * 将在2.0.0版本后移除
-     *
-     * @param decor decor
-     * @deprecated get().removeItemDecoration(decor);
-     */
-    @Deprecated
-    public void removeItemDecoration(RecyclerView.ItemDecoration decor) {
-        mRecyclerView.removeItemDecoration(decor);
     }
 
     void resolveSwipeConflicts(boolean enabled) {
@@ -417,30 +352,19 @@ public class PLRecyclerView extends FrameLayout {
     private void configDefaultBehavior() {
         // 默认为关闭,设置OnRefreshListener时打开
         mSwipeRefreshLayout.setEnabled(false);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-            }
-        });
+        mSwipeRefreshLayout.setOnRefreshListener(this::refresh);
         mRecyclerView.addOnScrollListener(mScrollListener);
 
         // 设置error view 默认行为,点击刷新
-        mErrorView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayLoadingAndResetStatus();
-                refresh();
-            }
+        mErrorView.setOnClickListener(v -> {
+            displayLoadingAndResetStatus();
+            refresh();
         });
 
         // 设置load more failed view 默认行为, 点击恢复加载
-        mLoadMoreFailedView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resumeLoadMoreIfEnabled();
-                displayOrDisappear(mLoadMoreFailedView, false);
-            }
+        mLoadMoreFailedView.setOnClickListener(v -> {
+            resumeLoadMoreIfEnabled();
+            displayOrDisappear(mLoadMoreFailedView, false);
         });
     }
 
@@ -529,6 +453,9 @@ public class PLRecyclerView extends FrameLayout {
 
         private boolean isLastItem(RecyclerView recyclerView) {
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (null == layoutManager) {
+                return true;
+            }
             int visibleItemCount = layoutManager.getChildCount();
             int totalItemCount = layoutManager.getItemCount();
             int lastVisibleItemPosition = getLastVisibleItemPosition(layoutManager);

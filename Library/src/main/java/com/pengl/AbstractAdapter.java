@@ -1,4 +1,4 @@
-package com.pengl.PLRecyclerView;
+package com.pengl;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -21,7 +21,7 @@ import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
  */
 public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractViewHolder> extends RecyclerView.Adapter<VH> {
 
-    private DataSetObservable<T> dataSet;
+    private final DataSetObservable<T> dataSet;
     private RecyclerView mRecyclerView;
 
     public AbstractAdapter() {
@@ -505,7 +505,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         return null;
     }
 
-    private class SectionItemViewHolder extends AbstractViewHolder {
+    private static class SectionItemViewHolder extends AbstractViewHolder {
 
         SectionItemViewHolder(View itemView) {
             super(itemView);

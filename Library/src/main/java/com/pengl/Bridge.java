@@ -1,4 +1,4 @@
-package com.pengl.PLRecyclerView;
+package com.pengl;
 
 /**
  *
@@ -14,8 +14,8 @@ interface Bridge {
     }
 
     class Empty implements Bridge {
-        private int resId;
-        private String content;
+        private final int resId;
+        private final String content;
 
         public Empty(int resId, String content) {
             this.resId = resId;
@@ -36,8 +36,8 @@ interface Bridge {
     }
 
     class Error implements Bridge {
-        private int resId;
-        private String err;
+        private final int resId;
+        private final String err;
 
         public Error(int resId, String err) {
             this.resId = resId;
@@ -87,7 +87,7 @@ interface Bridge {
 
     class SwipeConflicts implements Bridge {
 
-        private boolean enabled;
+        private final boolean enabled;
 
         SwipeConflicts(boolean enabled) {
             this.enabled = enabled;

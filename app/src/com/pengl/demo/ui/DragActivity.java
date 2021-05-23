@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.pengl.PLRecyclerView.SimpleItemTouchHelperCallback;
+import com.pengl.TouchHelperDragCallback;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterDrag;
 import com.pengl.demo.model.BeanDrag;
@@ -89,7 +89,8 @@ public class DragActivity extends BaseActivity {
 
         // 初始化拖拽, 设置不启用默认的长按拖拽, 设置不启用默认的滑动删除
         // 具体的拖拽实现在 ViewHolder 中
-        ItemTouchHelperProvider.init(new SimpleItemTouchHelperCallback(false, false));
+        ItemTouchHelperProvider.init(new TouchHelperDragCallback(false, false));
+
         mRecycler.attachItemTouchHelper(ItemTouchHelperProvider.getInstance());
     }
 

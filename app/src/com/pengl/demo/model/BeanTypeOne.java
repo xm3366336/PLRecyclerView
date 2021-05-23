@@ -1,6 +1,6 @@
 package com.pengl.demo.model;
 
-import com.pengl.PLRecyclerView.ItemType;
+import com.pengl.ItemType;
 
 /**
  *
