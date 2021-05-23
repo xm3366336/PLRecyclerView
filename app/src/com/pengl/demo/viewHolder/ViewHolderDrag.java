@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pengl.AbstractViewHolder;
+import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.utils.ItemTouchHelperProvider;
 import com.pengl.demo.model.BeanDrag;

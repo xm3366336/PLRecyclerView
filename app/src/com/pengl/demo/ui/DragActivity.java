@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.pengl.TouchHelperDragCallback;
+import com.pengl.recyclerview.TouchHelperDragCallback;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterDrag;
 import com.pengl.demo.model.BeanDrag;

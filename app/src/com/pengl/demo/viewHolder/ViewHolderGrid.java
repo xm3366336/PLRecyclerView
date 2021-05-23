@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pengl.AbstractViewHolder;
+import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.model.BeanGrid;
 

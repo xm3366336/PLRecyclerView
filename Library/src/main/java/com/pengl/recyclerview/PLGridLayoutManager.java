@@ -1,4 +1,4 @@
-package com.pengl;
+package com.pengl.recyclerview;
 
 import android.content.Context;
 import android.util.AttributeSet;

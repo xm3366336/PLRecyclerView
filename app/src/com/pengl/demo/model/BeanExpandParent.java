@@ -1,6 +1,6 @@
 package com.pengl.demo.model;
 
-import com.pengl.ItemType;
+import com.pengl.recyclerview.ItemType;
 
 import java.util.List;
 

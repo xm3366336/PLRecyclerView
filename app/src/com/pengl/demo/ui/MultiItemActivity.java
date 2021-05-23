@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.pengl.ItemType;
+import com.pengl.recyclerview.ItemType;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterMultiItem;
 import com.pengl.demo.model.BeanTypeOne;
