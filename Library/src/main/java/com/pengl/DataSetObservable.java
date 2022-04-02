@@ -1,4 +1,6 @@
-package com.pengl.recyclerview;
+package com.pengl;
+
+import com.pengl.recyclerview.SectionItem;
 
 import java.util.ArrayList;
 import java.util.List;

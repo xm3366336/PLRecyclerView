@@ -1,4 +1,4 @@
-package com.pengl.recyclerview;
+package com.pengl;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
+
+import com.pengl.DataSetObservable;
+import com.pengl.recyclerview.AbstractViewHolder;
+import com.pengl.recyclerview.ItemType;
+import com.pengl.recyclerview.SectionItem;
+import com.pengl.recyclerview.SectionItemImpl;
 
 /**
  *
@@ -442,11 +448,11 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         }
     }
 
-    void resolveSwipeConflicts(boolean enabled) {
+    public void resolveSwipeConflicts(boolean enabled) {
         dataSet.notifyResolveSwipeConflicts(enabled);
     }
 
-    boolean canDrag(int adapterPosition) {
+    public boolean canDrag(int adapterPosition) {
         return dataSet.data.is(adapterPosition);
     }
 

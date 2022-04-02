@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.pengl.PLRecyclerView;
 import com.pengl.recyclerview.ConfigureAdapter;
-import com.pengl.recyclerview.PLRecyclerView;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;

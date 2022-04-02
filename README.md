@@ -5,7 +5,7 @@
 > 1、使用
 
 ```
-implementation 'com.github.xm3366336:PLRecyclerView:2.0.0'
+implementation 'com.github.xm3366336:PLRecyclerView:2.0.1'
 ```
 
 > 2、Demo下载
@@ -13,10 +13,13 @@ implementation 'com.github.xm3366336:PLRecyclerView:2.0.0'
 
 > 3、更新日志
 
+## Update 20220402
+1. 升级gradle
+
 ## Update 20210523
-1、去除JCenter，替换为jitpack.io；
-2、由原来的com.pengl.PLRecyclerView.PLRecyclerView，换成com.pengl.PLRecyclerView；
-3、由包名更换，版本改为2.0.0，删除了上个版本标记的过时方法，请使用get().xxx替代。
+1. 去除JCenter，替换为jitpack.io；
+2. 由原来的com.pengl.PLRecyclerView.PLRecyclerView，换成com.pengl.PLRecyclerView；
+3. 由包名更换，版本改为2.0.0，删除了上个版本标记的过时方法，请使用get().xxx替代。
 
 ## Update 20200722
 1. 重新整理Demo；

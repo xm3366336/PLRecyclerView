@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pengl.recyclerview.AbstractAdapter;
+import com.pengl.PLRecyclerView;
+import com.pengl.AbstractAdapter;
 import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.recyclerview.PLLinearLayoutManager;
-import com.pengl.recyclerview.PLRecyclerView;
 import com.pengl.demo.R;
 import com.pengl.demo.model.BeanMainFun;
 import com.pengl.demo.viewHolder.ViewFooter;
@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Class<?>[] ARRAY_CLASS = new Class<?>[]{//
+    private final Class<?>[] ARRAY_CLASS = new Class<?>[]{//
             EmptyActivity.class,//
             ErrorActivity.class,//
             SingleItemActivity.class, //
@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static class MenuViewHolder extends AbstractViewHolder<BeanMainFun> {
 
-        private View container;
-        private TextView mMenu;
-        private Context mContext;
+        private final View container;
+        private final TextView mMenu;
+        private final Context mContext;
 
         MenuViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_menu);

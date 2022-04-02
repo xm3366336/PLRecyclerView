@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pengl.recyclerview.AbstractAdapter;
+import com.pengl.AbstractAdapter;
 import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterExpand;
