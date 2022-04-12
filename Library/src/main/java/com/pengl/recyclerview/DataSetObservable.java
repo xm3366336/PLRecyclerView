@@ -1,6 +1,4 @@
-package com.pengl;
-
-import com.pengl.recyclerview.SectionItem;
+package com.pengl.recyclerview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,9 +211,8 @@ class DataSetObservable<E> extends Observable {
             }
         }
 
-        @SuppressWarnings({"rawtypes", "unchecked"})
         void swap(int fromAdapterPosition, int toAdapterPosition) {
-            final List l = getAll();
+            final List<T> l = getAll();
             fromAdapterPosition = fromAdapterPosition - positionImpl();
             toAdapterPosition = toAdapterPosition - positionImpl();
             l.set(fromAdapterPosition, l.set(toAdapterPosition, l.get(fromAdapterPosition)));

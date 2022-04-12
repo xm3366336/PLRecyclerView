@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pengl.AbstractAdapter;
-
 /**
  *
  */
@@ -15,7 +13,7 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
 
     private final boolean isLongPressDragEnabled;
     private final boolean isSwipeEnabled;
-    private AbstractAdapter mAdapter;
+    private AbstractAdapter<?, ?> mAdapter;
 
     /**
      * SimpleItemTouchHelperCallback
@@ -34,8 +32,8 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
             return 0;
         }
 
-        mAdapter = (AbstractAdapter) recyclerView.getAdapter();
-        int currentPosition = viewHolder.getAdapterPosition();
+        mAdapter = (AbstractAdapter<?, ?>) recyclerView.getAdapter();
+        int currentPosition = viewHolder.getBindingAdapterPosition();
         if (!mAdapter.canDrag(currentPosition)) {
             return 0;
         }
@@ -60,10 +58,10 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-        if (!mAdapter.canDrag(viewHolder.getAdapterPosition()) || !mAdapter.canDrag(target.getAdapterPosition())) {
+        if (!mAdapter.canDrag(viewHolder.getBindingAdapterPosition()) || !mAdapter.canDrag(target.getBindingAdapterPosition())) {
             return true;
         }
-        mAdapter.swap(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mAdapter.swap(viewHolder.getBindingAdapterPosition(), target.getBindingAdapterPosition());
         return true;
     }
 
@@ -79,10 +77,10 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        if (!mAdapter.canDrag(viewHolder.getAdapterPosition())) {
+        if (!mAdapter.canDrag(viewHolder.getBindingAdapterPosition())) {
             return;
         }
-        mAdapter.remove(viewHolder.getAdapterPosition());
+        mAdapter.remove(viewHolder.getBindingAdapterPosition());
     }
 
     @Override

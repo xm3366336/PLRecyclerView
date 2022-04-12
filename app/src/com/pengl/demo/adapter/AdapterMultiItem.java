@@ -2,7 +2,7 @@ package com.pengl.demo.adapter;
 
 import android.view.ViewGroup;
 
-import com.pengl.AbstractAdapter;
+import com.pengl.recyclerview.AbstractAdapter;
 import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.recyclerview.ItemType;
 import com.pengl.demo.model.RecyclerItemType;
@@ -14,7 +14,7 @@ import com.pengl.demo.viewHolder.ViewHolderTypeTwo;
 /**
  *
  */
-public class AdapterMultiItem extends AbstractAdapter<ItemType, AbstractViewHolder> {
+public class AdapterMultiItem extends AbstractAdapter<ItemType, AbstractViewHolder<ItemType>> {
 
     @Override
     protected AbstractViewHolder onNewCreateViewHolder(ViewGroup parent, int viewType) {

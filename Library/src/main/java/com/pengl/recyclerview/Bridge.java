@@ -1,9 +1,11 @@
-package com.pengl;
+package com.pengl.recyclerview;
+
+import com.pengl.PLRecyclerView;
 
 /**
  *
  */
-interface Bridge {
+public interface Bridge {
     void doSomething(PLRecyclerView host);
 
     class Loading implements Bridge {

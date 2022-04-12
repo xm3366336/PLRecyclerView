@@ -39,6 +39,7 @@
     <string name="action_opt_insert_back">Insert 1 after item 5</string>
     <string name="action_opt_remove">Delete item 5</string>
     <string name="action_opt_remove_multi">From item 5, delete 2</string>
+    <string name="action_opt_empty">Clear All</string>
 
     <string name="seq_data_1">%1$dth</string>
     <string name="seq_data_2">This is the %1$dth data</string>

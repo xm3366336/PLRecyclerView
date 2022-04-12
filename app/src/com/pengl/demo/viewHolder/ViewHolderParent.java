@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pengl.AbstractAdapter;
+import com.pengl.recyclerview.AbstractAdapter;
 import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterExpand;
@@ -19,13 +19,13 @@ import java.util.List;
  */
 public class ViewHolderParent extends AbstractViewHolder<BeanExpandParent> implements View.OnClickListener {
 
-    private TextView mText;
-    private ImageView mImageView;
+    private final TextView mText;
+    private final ImageView mImageView;
 
     private BeanExpandParent parent;
     private List<BeanExpandChild> child;
 
-    private AdapterExpand mAdapter;
+    private final AdapterExpand mAdapter;
 
     public ViewHolderParent(AbstractAdapter adapter, ViewGroup parent) {
         super(parent, R.layout.item_parent);
@@ -41,16 +41,22 @@ public class ViewHolderParent extends AbstractViewHolder<BeanExpandParent> imple
         mText.setText(String.valueOf(data.getText()));
         child = data.getChildList();
         parent = data;
+
+        if (data.isExpand()) {
+            mImageView.setImageResource(R.drawable.ic_keyboard_arrow_up);
+        } else {
+            mImageView.setImageResource(R.drawable.ic_keyboard_arrow_down);
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (parent.isExpand()) {
-            mAdapter.removeBack(getAdapterPosition(), child.size());
+            mAdapter.removeBack(getBindingAdapterPosition(), child.size());
             parent.setExpand(false);
             mImageView.setImageResource(R.drawable.ic_keyboard_arrow_down);
         } else {
-            mAdapter.insertAllBack(getAdapterPosition(), child);
+            mAdapter.insertAllBack(getBindingAdapterPosition(), child);
             parent.setExpand(true);
             mImageView.setImageResource(R.drawable.ic_keyboard_arrow_up);
         }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pengl.PLRecyclerView;
-import com.pengl.AbstractAdapter;
+import com.pengl.recyclerview.AbstractAdapter;
 import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.recyclerview.PLLinearLayoutManager;
 import com.pengl.demo.R;

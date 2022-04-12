@@ -26,4 +26,10 @@
         android:title="@string/action_opt_remove_multi"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_opt_empty"
+        android:orderInCategory="100"
+        android:title="@string/action_opt_empty"
+        app:showAsAction="never" />
+
 </menu>

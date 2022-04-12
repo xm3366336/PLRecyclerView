@@ -2,6 +2,7 @@ package com.pengl.demo.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
 import com.pengl.demo.R;
@@ -48,6 +49,7 @@ public class GridActivity extends BaseActivity {
         private final WeakReference<GridActivity> mActivity;
 
         MyHandler(GridActivity activity) {
+            super(Looper.myLooper());
             mActivity = new WeakReference<>(activity);
         }
 

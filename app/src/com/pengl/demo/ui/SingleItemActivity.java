@@ -2,6 +2,7 @@ package com.pengl.demo.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -87,19 +88,16 @@ public class SingleItemActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.action_opt_insert:
-                mAdapter.insert(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
-                break;
-            case R.id.action_opt_insert_back:
-                mAdapter.insertBack(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
-                break;
-            case R.id.action_opt_remove:
-                mAdapter.remove(5);
-                break;
-            case R.id.action_opt_remove_multi:
-                mAdapter.removeBack(5, 2);
-                break;
+        if (id == R.id.action_opt_insert) {
+            mAdapter.insert(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
+        } else if (id == R.id.action_opt_insert_back) {
+            mAdapter.insertBack(5, new BeanNormal(getString(R.string.seq_data_5), getString(R.string.seq_data_6, Common.getRandom(4))));
+        } else if (id == R.id.action_opt_remove) {
+            mAdapter.remove(5);
+        } else if (id == R.id.action_opt_remove_multi) {
+            mAdapter.removeBack(5, 2);
+        } else if (id == R.id.action_opt_empty) {
+            mAdapter.showEmpty();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -112,6 +110,7 @@ public class SingleItemActivity extends BaseActivity {
         private final WeakReference<SingleItemActivity> mActivity;
 
         MyHandler(SingleItemActivity activity) {
+            super(Looper.myLooper());
             mActivity = new WeakReference<>(activity);
         }
 

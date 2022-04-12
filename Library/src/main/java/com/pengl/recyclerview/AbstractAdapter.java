@@ -1,4 +1,4 @@
-package com.pengl;
+package com.pengl.recyclerview;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -16,16 +16,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-import com.pengl.DataSetObservable;
-import com.pengl.recyclerview.AbstractViewHolder;
-import com.pengl.recyclerview.ItemType;
-import com.pengl.recyclerview.SectionItem;
-import com.pengl.recyclerview.SectionItemImpl;
-
 /**
  *
  */
-public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractViewHolder<T>> extends RecyclerView.Adapter<VH> {
 
     private final DataSetObservable<T> dataSet;
     private RecyclerView mRecyclerView;
@@ -294,7 +288,6 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      */
     public void showEmpty(int resId, String content) {
         dataSet.clear();
-        notifyDataSetChanged();
         dataSet.notifyEmpty(resId, content);
     }
 
@@ -322,7 +315,6 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      */
     public void showError(int resId, String error) {
         dataSet.clear();
-        notifyDataSetChanged();
         dataSet.notifyError(resId, error);
     }
 
@@ -399,7 +391,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     @Override
     public void onViewAttachedToWindow(@NonNull VH holder) {
         super.onViewAttachedToWindow(holder);
-        int position = holder.getAdapterPosition();
+        int position = holder.getBindingAdapterPosition();
 
         // 瀑布流的 Header Footer 宽度处理
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
@@ -456,7 +448,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         return dataSet.data.is(adapterPosition);
     }
 
-    void show(View view, boolean enabled) {
+    public void show(View view, boolean enabled) {
         if (dataSet.extra.size() == 0) {
             if (enabled) {
                 dataSet.extra.add(new SectionItemImpl(view));
@@ -478,7 +470,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         }
     }
 
-    void registerObserver(Observer observer) {
+    public void registerObserver(Observer observer) {
         dataSet.addObserver(observer);
     }
 
@@ -487,15 +479,9 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     protected abstract void onNewBindViewHolder(VH holder, int position);
 
     private void loadMore() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                dataSet.notifyAutoLoadMore();
-            }
-        });
+        new Handler(Looper.getMainLooper()).post(dataSet::notifyAutoLoadMore);
     }
 
-    @SuppressWarnings("unchecked")
     private VH createHeaderFooterViewHolder(ViewGroup parent, int viewType) {
         List<SectionItem> tempContainer = new ArrayList<>();
         tempContainer.addAll(dataSet.header.getAll());
@@ -511,7 +497,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         return null;
     }
 
-    private static class SectionItemViewHolder extends AbstractViewHolder {
+    private class SectionItemViewHolder extends AbstractViewHolder<T> {
 
         SectionItemViewHolder(View itemView) {
             super(itemView);

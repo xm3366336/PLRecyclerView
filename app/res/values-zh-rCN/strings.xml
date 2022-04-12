@@ -39,6 +39,7 @@
     <string name="action_opt_insert_back">在第5项的后面插1条</string>
     <string name="action_opt_remove">删除第5项</string>
     <string name="action_opt_remove_multi">从第5项起，删除2条</string>
+    <string name="action_opt_empty">全部清空</string>
 
     <string name="seq_data_1">第%1$d个</string>
     <string name="seq_data_2">这是第%1$d条数据</string>

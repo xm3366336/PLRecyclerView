@@ -2,6 +2,7 @@ package com.pengl.demo.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class ErrorActivity extends BaseActivity {
         private final WeakReference<ErrorActivity> mActivity;
 
         MyHandler(ErrorActivity activity) {
+            super(Looper.myLooper());
             mActivity = new WeakReference<>(activity);
         }
 

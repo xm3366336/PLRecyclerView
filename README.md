@@ -5,7 +5,7 @@
 > 1、使用
 
 ```
-implementation 'com.github.xm3366336:PLRecyclerView:2.0.1'
+implementation 'com.github.xm3366336:PLRecyclerView:2.0.2'
 ```
 
 > 2、Demo下载
@@ -13,8 +13,11 @@ implementation 'com.github.xm3366336:PLRecyclerView:2.0.1'
 
 > 3、更新日志
 
-## Update 20220402
-1. 升级gradle
+## Update 20220412
+1. 升级gradle；
+2. 以后只用com.pengl.PLRecyclerview；
+3. 删除了上个版本标记的过时方法；
+4. 修改ExpandActivity，默认展开某项；
 
 ## Update 20210523
 1. 去除JCenter，替换为jitpack.io；

@@ -42,36 +42,34 @@ public class DragActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
-            case R.id.action_edit:
-                flag = !flag;
-                if (flag) {
-                    item.setTitle(getString(R.string.action_save));
-                } else {
-                    item.setTitle(getString(R.string.action_edit));
-                }
+        if (id == R.id.action_edit) {
+            flag = !flag;
+            if (flag) {
+                item.setTitle(getString(R.string.action_save));
+            } else {
+                item.setTitle(getString(R.string.action_edit));
+            }
 
-                // 点击编辑显示拖动图标
-                List<BeanDrag> copy = mAdapter.getData();
-                for (BeanDrag each : copy) {
-                    each.setStatus(!each.isStatus());
-                }
-                mAdapter.notifyDataSetChanged();
+            // 点击编辑显示拖动图标
+            List<BeanDrag> copy = mAdapter.getData();
+            for (BeanDrag each : copy) {
+                each.setStatus(!each.isStatus());
+            }
+            mAdapter.notifyDataSetChanged();
 
-                return true;
+            return true;
+        } else if (id == R.id.action_grid) {
+            gridChecked = !item.isChecked();
+            item.setChecked(gridChecked);
 
-            case R.id.action_grid:
-                gridChecked = !item.isChecked();
-                item.setChecked(gridChecked);
-
-                if (gridChecked) {
-                    mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
-                    mRecycler.setAdapter(mAdapter);
-                } else {
-                    mRecycler.setLayoutManager(new LinearLayoutManager(this));
-                    mRecycler.setAdapter(mAdapter);
-                }
-                return true;
+            if (gridChecked) {
+                mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+                mRecycler.setAdapter(mAdapter);
+            } else {
+                mRecycler.setLayoutManager(new LinearLayoutManager(this));
+                mRecycler.setAdapter(mAdapter);
+            }
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

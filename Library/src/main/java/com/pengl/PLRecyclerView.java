@@ -1,9 +1,7 @@
 package com.pengl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -19,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.pengl.recyclerview.AbstractAdapter;
+import com.pengl.recyclerview.Bridge;
 import com.pengl.recyclerview.Configure;
 import com.pengl.recyclerview.R;
 
@@ -28,9 +28,6 @@ import java.util.Observer;
 public class PLRecyclerView extends FrameLayout {
 
     private boolean mAutoLoadMoreEnabled = true;
-    private boolean mNoMoreViewEnabled = true;
-    private boolean mLoadMoreViewEnabled = true;
-    private boolean mLoadMoreFailedViewEnabled = true;
 
     private OnRefreshListener mRefreshListener;
     private OnLoadMoreListener mLoadMoreListener;
@@ -67,13 +64,9 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     public PLRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initMainView(context);
-        obtainStyledAttributes(context, attrs);
-        configDefaultBehavior();
+        this(context, attrs, defStyleAttr, 0);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public PLRecyclerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initMainView(context);
@@ -122,14 +115,13 @@ public class PLRecyclerView extends FrameLayout {
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
-    public void setAdapter(RecyclerView.Adapter adapter) {
+    public void setAdapter(AbstractAdapter<?, ?> adapter) {
         mRecyclerView.setAdapter(adapter);
     }
 
-    public void setAdapterWithLoading(RecyclerView.Adapter adapter) {
-        if (adapter instanceof AbstractAdapter) {
-            AbstractAdapter abstractAdapter = (AbstractAdapter) adapter;
-            subscribeWithAdapter(abstractAdapter);
+    public void setAdapterWithLoading(AbstractAdapter<?, ?> adapter) {
+        if (adapter != null) {
+            subscribeWithAdapter(adapter);
         }
         displayLoadingAndResetStatus();
         mRecyclerView.setAdapter(adapter);
@@ -145,81 +137,14 @@ public class PLRecyclerView extends FrameLayout {
         mAutoLoadMoreEnabled = autoLoadMoreEnable;
     }
 
-    /**
-     * 显示或关闭LoadMoreView , 不建议使用
-     * 注意, 仅仅只是不显示, 但仍会继续加载, 如需关闭自动加载功能, 请往上看
-     * 将在2.0.0版本后移除
-     *
-     * @param enabled true 为显示, false为不显示
-     * @deprecated 不建议使用，以后会去除
-     */
-    @Deprecated
-    public void setLoadMoreViewEnabled(boolean enabled) {
-        mLoadMoreViewEnabled = enabled;
-        if (!enabled) {
-            displayLoadMoreViewOrDisappear();
-        } else {
-            if (mScrollListener.isLastItem(mRecyclerView)) {
-                autoLoadMoreIfEnabled();
-                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
-                if (null != lm)
-                    get().smoothScrollToPosition(lm.getItemCount() - 1);
-            }
-        }
-    }
-
-    /**
-     * 显示或关闭LoadMoreFailedView, 不建议使用
-     * 将在2.0.0版本后移除
-     *
-     * @param enabled true 为显示, false为关闭
-     * @deprecated 不用了，出错时，请手工调用
-     */
-    @Deprecated
-    public void setLoadMoreFailedViewEnabled(boolean enabled) {
-        mLoadMoreFailedViewEnabled = enabled;
-        if (!enabled) {
-            displayLoadMoreFailedViewOrDisappear();
-        } else {
-            if (loadMoreFailed) {
-                displayLoadMoreFailedViewOrDisappear();
-                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
-                if (null != lm)
-                    get().smoothScrollToPosition(lm.getItemCount() - 1);
-            }
-        }
-    }
-
-    /**
-     * 显示或关闭NoMoreView, 按需使用
-     * 将在2.0.0版本后移除
-     *
-     * @param enabled true为显示, false为关闭
-     * @deprecated 不用了，没有数据时，请手工调用 mAdapter.showNoMore()显示；
-     */
-    @Deprecated
-    public void setNoMoreViewEnabled(boolean enabled) {
-        mNoMoreViewEnabled = enabled;
-        if (!enabled) {
-            displayNoMoreViewOrDisappear();
-        } else {
-            if (noMore) {
-                displayNoMoreViewOrDisappear();
-                RecyclerView.LayoutManager lm = mRecyclerView.getLayoutManager();
-                if (null != lm)
-                    get().smoothScrollToPosition(lm.getItemCount() - 1);
-            }
-        }
-    }
-
-    void resolveSwipeConflicts(boolean enabled) {
+    public void resolveSwipeConflicts(boolean enabled) {
         if (mRefreshListener == null) {
             return;
         }
         mSwipeRefreshLayout.setEnabled(enabled);
     }
 
-    void displayLoadingAndResetStatus() {
+    public void displayLoadingAndResetStatus() {
         mErrorContainer.setVisibility(GONE);
         mRecyclerView.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
@@ -227,7 +152,7 @@ public class PLRecyclerView extends FrameLayout {
         resetStatus();
     }
 
-    void displayContentAndResetStatus() {
+    public void displayContentAndResetStatus() {
         mLoadingContainer.setVisibility(GONE);
         mErrorContainer.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
@@ -235,7 +160,7 @@ public class PLRecyclerView extends FrameLayout {
         resetStatus();
     }
 
-    void displayEmptyAndResetStatus(int resId, String content) {
+    public void displayEmptyAndResetStatus(int resId, String content) {
         mLoadingContainer.setVisibility(GONE);
         mRecyclerView.setVisibility(GONE);
         mErrorContainer.setVisibility(GONE);
@@ -256,7 +181,7 @@ public class PLRecyclerView extends FrameLayout {
         resetStatus();
     }
 
-    void displayErrorAndResetStatus(int resId, String error) {
+    public void displayErrorAndResetStatus(int resId, String error) {
         mLoadingContainer.setVisibility(GONE);
         mRecyclerView.setVisibility(GONE);
         mEmptyContainer.setVisibility(GONE);
@@ -277,22 +202,22 @@ public class PLRecyclerView extends FrameLayout {
         resetStatus();
     }
 
-    void showNoMoreIfEnabled() {
+    public void showNoMoreIfEnabled() {
         displayNoMoreViewOrDisappear();
         noMore = true;
     }
 
-    void showLoadMoreFailedIfEnabled() {
+    public void showLoadMoreFailedIfEnabled() {
         displayLoadMoreFailedViewOrDisappear();
         loadMoreFailed = true;
     }
 
-    void resumeLoadMoreIfEnabled() {
+    public void resumeLoadMoreIfEnabled() {
         loadMoreFailed = false;
         autoLoadMoreIfEnabled();
     }
 
-    void autoLoadMoreIfEnabled() {
+    public void autoLoadMoreIfEnabled() {
         if (canNotLoadMore())
             return;
         displayLoadMoreViewOrDisappear();
@@ -302,7 +227,7 @@ public class PLRecyclerView extends FrameLayout {
         }
     }
 
-    void manualLoadMoreIfEnabled() {
+    public void manualLoadMoreIfEnabled() {
         if (canNotLoadMore())
             return;
         displayLoadMoreViewOrDisappear();
@@ -311,22 +236,21 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     private void displayNoMoreViewOrDisappear() {
-        displayOrDisappear(mNoMoreView, mNoMoreViewEnabled);
+        displayOrDisappear(mNoMoreView, true);
     }
 
     private void displayLoadMoreFailedViewOrDisappear() {
-        displayOrDisappear(mLoadMoreFailedView, mLoadMoreFailedViewEnabled);
+        displayOrDisappear(mLoadMoreFailedView, true);
     }
 
     private void displayLoadMoreViewOrDisappear() {
-        displayOrDisappear(mLoadMoreView, mLoadMoreViewEnabled);
+        displayOrDisappear(mLoadMoreView, true);
     }
 
     private void displayOrDisappear(View view, boolean enabled) {
         if (!(mRecyclerView.getAdapter() instanceof AbstractAdapter))
             return;
-        AbstractAdapter adapter = (AbstractAdapter) mRecyclerView.getAdapter();
-        adapter.show(view, enabled);
+        ((AbstractAdapter<?, ?>) mRecyclerView.getAdapter()).show(view, enabled);
     }
 
     private void resetStatus() {
@@ -397,6 +321,9 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     private void obtainStyledAttributes(Context context, AttributeSet attrs) {
+        if (null == attrs)
+            return;
+
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PLRecyclerView);
         int loadingResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_loading_layout, R.layout.pl_rv_loading_layout);
         int emptyResId = attributes.getResourceId(R.styleable.PLRecyclerView_pl_rv_empty_layout, R.layout.pl_rv_empty_layout);
@@ -415,7 +342,7 @@ public class PLRecyclerView extends FrameLayout {
         attributes.recycle();
     }
 
-    private void subscribeWithAdapter(AbstractAdapter adapter) {
+    private void subscribeWithAdapter(AbstractAdapter<?, ?> adapter) {
         adapter.registerObserver(mObserver);
     }
 

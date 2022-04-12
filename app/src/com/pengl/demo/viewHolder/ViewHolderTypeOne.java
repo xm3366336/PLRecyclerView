@@ -14,8 +14,8 @@ import com.pengl.demo.model.BeanTypeOne;
  */
 public class ViewHolderTypeOne extends AbstractViewHolder<BeanTypeOne> {
 
-    private Context mContext;
-    private TextView mText;
+    private final Context mContext;
+    private final TextView mText;
 
     public ViewHolderTypeOne(ViewGroup parent) {
         super(parent, R.layout.item_type_one);

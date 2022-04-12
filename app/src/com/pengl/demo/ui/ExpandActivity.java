@@ -24,6 +24,9 @@ public class ExpandActivity extends BaseActivity {
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
+        // 默认展开第2项
+        int expandPosition = 1;
+
         List<BeanExpandParent> listParent = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
 
@@ -32,11 +35,13 @@ public class ExpandActivity extends BaseActivity {
                 listChild.add(new BeanExpandChild(getString(R.string.seq_data_4, (i + 1), (x + 1))));
             }
 
-            listParent.add(new BeanExpandParent(getString(R.string.seq_data_3, (i + 1)), listChild, false));
+            listParent.add(new BeanExpandParent(getString(R.string.seq_data_3, (i + 1)), listChild, i == expandPosition));
         }
 
         mAdapter.clear();
         mAdapter.addAll(listParent);
+
+        mAdapter.insertAllBack(expandPosition, listParent.get(expandPosition).getChildList());
     }
 
 }
