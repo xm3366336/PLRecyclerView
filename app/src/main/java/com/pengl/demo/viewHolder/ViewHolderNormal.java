@@ -1,5 +1,6 @@
 package com.pengl.demo.viewHolder;
 
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -9,8 +10,8 @@ import com.pengl.demo.model.BeanNormal;
 
 public class ViewHolderNormal extends AbstractViewHolder<BeanNormal> {
 
-    private TextView mTitle;
-    private TextView mContent;
+    private final TextView mTitle;
+    private final TextView mContent;
 
     public ViewHolderNormal(ViewGroup parent) {
         super(parent, R.layout.item_normal);

@@ -3,7 +3,6 @@ apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         applicationId "com.pengl.PLRecyclerView.demo"
@@ -20,16 +19,6 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            assets.srcDirs = ['assets']
-            java.srcDirs = ['src']
-            res.srcDirs = ['res']
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -40,9 +29,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':Library')
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.annotation:annotation:1.3.0'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation 'com.google.android.material:material:1.7.0'
 
 }

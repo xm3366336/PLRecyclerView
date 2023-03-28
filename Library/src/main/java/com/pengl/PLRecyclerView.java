@@ -27,6 +27,8 @@ import java.util.Observer;
 
 public class PLRecyclerView extends FrameLayout {
 
+    public static final String TAG = PLRecyclerView.class.getSimpleName();
+
     private boolean mAutoLoadMoreEnabled = true;
 
     private OnRefreshListener mRefreshListener;
@@ -385,7 +387,8 @@ public class PLRecyclerView extends FrameLayout {
             int totalItemCount = layoutManager.getItemCount();
             int lastVisibleItemPosition = getLastVisibleItemPosition(layoutManager);
 
-            return visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 1 && totalItemCount >= visibleItemCount;
+            return visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 1
+                    && totalItemCount >= visibleItemCount;
         }
 
         private int getLastVisibleItemPosition(RecyclerView.LayoutManager layoutManager) {

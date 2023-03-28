@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Space;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +30,37 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     public void clear() {
-        dataSet.clear();
-        notifyDataSetChanged();
+        int size = dataSet.totalSize();
+        if (size > 0) {
+            dataSet.clear();
+            notifyItemRangeChanged(0, size);
+        }
     }
 
     public void clearData() {
-        dataSet.data.clear();
-        notifyDataSetChanged();
+        int start = dataSet.header.size();
+        int size = dataSet.data.size();
+        if (size > 0) {
+            dataSet.data.clear();
+            notifyItemRangeChanged(start, size);
+        }
     }
 
     public void clearHeader() {
-        dataSet.header.clear();
-        notifyDataSetChanged();
+        int size = dataSet.header.size();
+        if (size > 0) {
+            dataSet.header.clear();
+            notifyItemRangeChanged(0, size);
+        }
     }
 
     public void clearFooter() {
-        dataSet.footer.clear();
-        notifyDataSetChanged();
+        int start = dataSet.header.size() + dataSet.data.size();
+        int size = dataSet.footer.size();
+        if (size > 0) {
+            dataSet.footer.clear();
+            notifyItemRangeChanged(start, size);
+        }
     }
 
     /**
@@ -78,7 +93,8 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         } else {
             dataSet.data.clear();
             dataSet.data.addAll(data);
-            notifyDataSetChanged();
+            int start = dataSet.header.size();
+            notifyItemRangeChanged(start, data.size());
         }
 
         if (dataSet.totalSize() == 0) {
@@ -97,6 +113,26 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
 
     public void addFooter(SectionItem footer) {
         dataSet.footer.add(footer);
+    }
+
+    /**
+     * 底部加个space空间
+     *
+     * @param height 高度
+     */
+    public void addFooterSpace(int height) {
+        dataSet.footer.add(new SectionItem() {
+            @Override
+            public View createView(ViewGroup parent) {
+                Space space = new Space(mRecyclerView.getContext());
+                space.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
+                return space;
+            }
+
+            @Override
+            public void onBind() {
+            }
+        });
     }
 
     /**

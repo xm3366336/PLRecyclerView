@@ -1,5 +1,9 @@
 package com.pengl.recyclerview;
 
+import android.util.Log;
+
+import com.pengl.PLRecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -108,7 +112,7 @@ class DataSetObservable<E> extends Observable {
             if (is(adapterPosition)) {
                 insertImpl(adapterPosition - positionImpl(), item);
             } else {
-                throw new IndexOutOfBoundsException("Insert error,  insert position");
+                Log.e(PLRecyclerView.TAG, "insert error,  insert position");
             }
         }
 
@@ -116,7 +120,7 @@ class DataSetObservable<E> extends Observable {
             if (is(adapterPosition)) {
                 insertAllImpl(adapterPosition - positionImpl(), items);
             } else {
-                throw new IndexOutOfBoundsException("Insert error, check your insert position");
+                Log.e(PLRecyclerView.TAG, "insert error, check your insert position");
             }
         }
 
@@ -135,7 +139,7 @@ class DataSetObservable<E> extends Observable {
                     insertImpl(insertPosition, item);
                 }
             } else {
-                throw new IndexOutOfBoundsException("Insert error, check your insert position");
+                Log.e(PLRecyclerView.TAG, "insert error, check your insert position");
             }
         }
 
@@ -148,7 +152,7 @@ class DataSetObservable<E> extends Observable {
                     insertAllImpl(insertPosition, items);
                 }
             } else {
-                throw new IndexOutOfBoundsException("Insert error, check your insert position");
+                Log.e(PLRecyclerView.TAG, "insert error, check your insert position");
             }
         }
 
@@ -165,7 +169,7 @@ class DataSetObservable<E> extends Observable {
                     removeImpl(removePosition);
                 }
             } else {
-                throw new IndexOutOfBoundsException("Remove error, check your remove position");
+                Log.e(PLRecyclerView.TAG, "remove error, check your remove position");
             }
         }
 
@@ -184,14 +188,16 @@ class DataSetObservable<E> extends Observable {
         }
 
         final boolean is(int adapterPosition) {
-            return adapterPosition >= 0 && size() > 0 && adapterPosition - positionImpl() < size() && adapterPosition - positionImpl() >= 0;
+            return adapterPosition >= 0 && size() > 0
+                    && adapterPosition - positionImpl() < size()
+                    && adapterPosition - positionImpl() >= 0;
         }
 
         final void set(int adapterPosition, T newItem) {
             if (is(adapterPosition)) {
                 setImpl(adapterPosition - positionImpl(), newItem);
             } else {
-                throw new IndexOutOfBoundsException("Set error, check your set position");
+                Log.e(PLRecyclerView.TAG, "set error, check your set position");
             }
         }
 
@@ -199,7 +205,7 @@ class DataSetObservable<E> extends Observable {
             if (is(adapterPosition)) {
                 removeImpl(adapterPosition - positionImpl());
             } else {
-                throw new IndexOutOfBoundsException("Remove error, check your remove position");
+                Log.e(PLRecyclerView.TAG, "remove error, check your remove position");
             }
         }
 
@@ -207,7 +213,7 @@ class DataSetObservable<E> extends Observable {
             if (size() != 0) {
                 removeImpl(needRemove);
             } else {
-                throw new IndexOutOfBoundsException("Remove error, check your remove position");
+                Log.e(PLRecyclerView.TAG, "remove error, check your remove position");
             }
         }
 

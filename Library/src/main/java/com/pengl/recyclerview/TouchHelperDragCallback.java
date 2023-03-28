@@ -27,7 +27,8 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+    public int getMovementFlags(@NonNull RecyclerView recyclerView,
+                                @NonNull RecyclerView.ViewHolder viewHolder) {
         if (!(recyclerView.getAdapter() instanceof AbstractAdapter)) {
             return 0;
         }
@@ -42,7 +43,8 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
         int swipeFlags;
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+            dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN
+                    | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
             swipeFlags = 0;
         } else if (layoutManager instanceof LinearLayoutManager) {
             dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
@@ -57,8 +59,11 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
 
 
     @Override
-    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-        if (!mAdapter.canDrag(viewHolder.getBindingAdapterPosition()) || !mAdapter.canDrag(target.getBindingAdapterPosition())) {
+    public boolean onMove(@NonNull RecyclerView recyclerView,
+                          @NonNull RecyclerView.ViewHolder viewHolder,
+                          @NonNull RecyclerView.ViewHolder target) {
+        if (!mAdapter.canDrag(viewHolder.getBindingAdapterPosition())
+                || !mAdapter.canDrag(target.getBindingAdapterPosition())) {
             return true;
         }
         mAdapter.swap(viewHolder.getBindingAdapterPosition(), target.getBindingAdapterPosition());
@@ -86,7 +91,8 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
-        final boolean enabled = !(actionState == ItemTouchHelper.ACTION_STATE_DRAG || actionState == ItemTouchHelper.ACTION_STATE_SWIPE);
+        final boolean enabled = !(actionState == ItemTouchHelper.ACTION_STATE_DRAG
+                || actionState == ItemTouchHelper.ACTION_STATE_SWIPE);
         mAdapter.resolveSwipeConflicts(enabled);
     }
 }
