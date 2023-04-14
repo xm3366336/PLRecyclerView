@@ -10,6 +10,7 @@ import com.pengl.demo.adapter.AdapterGrid;
 import com.pengl.demo.model.BeanGrid;
 import com.pengl.demo.utils.BaseActivity;
 import com.pengl.demo.viewHolder.ViewHeader;
+import com.pengl.recyclerview.PLGridLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class GridActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAdapter = new AdapterGrid();
-        mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecycler.setLayoutManager(new PLGridLayoutManager(this, 3));
         mRecycler.setAdapterWithLoading(mAdapter);
         mRecycler.setRefreshListener(() -> {
             pageNum = 1;

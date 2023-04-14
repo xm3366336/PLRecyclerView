@@ -11,6 +11,7 @@ import com.pengl.demo.model.BeanTypeOne;
 import com.pengl.demo.model.BeanTypeTwo;
 import com.pengl.demo.utils.BaseActivity;
 import com.pengl.demo.viewHolder.ViewHeader;
+import com.pengl.recyclerview.PLLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class MultiItemActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAdapter = new AdapterMultiItem();
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
         mRecycler.setRefreshListener(() -> {
             pageNum = 1;

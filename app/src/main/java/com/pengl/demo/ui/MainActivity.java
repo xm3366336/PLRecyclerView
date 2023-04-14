@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             StaggeredActivity.class, //
             ManualLoadMoreActivity.class, //
             DragActivity.class, //
-            ExpandActivity.class //
+            ExpandActivity.class, //
+            TestActivity.class//
     };
 
     @Override

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.pengl.recyclerview.PLGridLayoutManager;
+import com.pengl.recyclerview.PLLinearLayoutManager;
 import com.pengl.recyclerview.TouchHelperDragCallback;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterDrag;
@@ -63,10 +65,10 @@ public class DragActivity extends BaseActivity {
             item.setChecked(gridChecked);
 
             if (gridChecked) {
-                mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+                mRecycler.setLayoutManager(new PLGridLayoutManager(this, 3));
                 mRecycler.setAdapter(mAdapter);
             } else {
-                mRecycler.setLayoutManager(new LinearLayoutManager(this));
+                mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
                 mRecycler.setAdapter(mAdapter);
             }
             return true;
@@ -80,7 +82,7 @@ public class DragActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAdapter = new AdapterDrag();
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
         getData();

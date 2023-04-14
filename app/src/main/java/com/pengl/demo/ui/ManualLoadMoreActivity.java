@@ -14,6 +14,7 @@ import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;
 import com.pengl.demo.viewHolder.ViewHeader;
+import com.pengl.recyclerview.PLLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
 
         PLRecyclerView mRecycler = findViewById(R.id.recycler);
         mRecycler.setAutoLoadEnable(false);// 关闭自动加载更多, 改为手动触发
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mAdapter = new AdapterNormal();
         mRecycler.setAdapterWithLoading(mAdapter);
         mRecycler.setRefreshListener(() -> {

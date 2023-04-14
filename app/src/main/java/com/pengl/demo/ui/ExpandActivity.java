@@ -8,6 +8,7 @@ import com.pengl.demo.model.BeanExpandChild;
 import com.pengl.demo.model.BeanExpandParent;
 import com.pengl.demo.utils.BaseActivity;
 import com.pengl.demo.utils.Common;
+import com.pengl.recyclerview.PLLinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ExpandActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         AdapterExpand mAdapter = new AdapterExpand();
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
 
         // 默认展开第2项

@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.0.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
@@ -13,8 +13,8 @@ ext {
     compileSdkVersion = 33
     minSdkVersion = 21
     targetSdkVersion = 33
-    versionCode = 2303281
-    versionName = "2.0.3"
+    versionCode = 2304141
+    versionName = "2.0.4"
 }
 
 allprojects {

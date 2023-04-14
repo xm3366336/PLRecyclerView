@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-
-group = 'com.github.xm3366336'
 
 android {
+    namespace 'com.pengl.recyclerview'
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
@@ -19,8 +17,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -28,14 +26,4 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-            }
-        }
-    }
 }

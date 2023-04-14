@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pengl.recyclerview.SectionItem;
 import com.pengl.demo.BuildConfig;
+import com.pengl.recyclerview.SectionItem;
 import com.pengl.demo.R;
 
 /**

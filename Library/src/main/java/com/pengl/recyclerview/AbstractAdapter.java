@@ -30,37 +30,23 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
     }
 
     public void clear() {
-        int size = dataSet.totalSize();
-        if (size > 0) {
-            dataSet.clear();
-            notifyItemRangeChanged(0, size);
-        }
+        dataSet.clear();
+        notifyDataSetChanged();
     }
 
     public void clearData() {
-        int start = dataSet.header.size();
-        int size = dataSet.data.size();
-        if (size > 0) {
-            dataSet.data.clear();
-            notifyItemRangeChanged(start, size);
-        }
+        dataSet.data.clear();
+        notifyDataSetChanged();
     }
 
     public void clearHeader() {
-        int size = dataSet.header.size();
-        if (size > 0) {
-            dataSet.header.clear();
-            notifyItemRangeChanged(0, size);
-        }
+        dataSet.header.clear();
+        notifyDataSetChanged();
     }
 
     public void clearFooter() {
-        int start = dataSet.header.size() + dataSet.data.size();
-        int size = dataSet.footer.size();
-        if (size > 0) {
-            dataSet.footer.clear();
-            notifyItemRangeChanged(start, size);
-        }
+        dataSet.footer.clear();
+        notifyDataSetChanged();
     }
 
     /**
@@ -93,8 +79,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         } else {
             dataSet.data.clear();
             dataSet.data.addAll(data);
-            int start = dataSet.header.size();
-            notifyItemRangeChanged(start, data.size());
+            notifyDataSetChanged();
         }
 
         if (dataSet.totalSize() == 0) {

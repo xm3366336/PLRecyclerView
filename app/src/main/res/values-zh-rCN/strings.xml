@@ -14,6 +14,7 @@
     <string name="title_activity_manual_load_more">ManualLoadMoreActivity</string>
     <string name="title_activity_expand">ExpandActivity</string>
     <string name="title_activity_item_drag">ItemDragActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
     <string-array name="main_fun_name">
         <item>空状态</item>
@@ -25,6 +26,7 @@
         <item>手动触发加载更多</item>
         <item>拖拽</item>
         <item>ExpandItemList</item>
+        <item>测试页</item>
     </string-array>
 
     <string name="click_to_load">点击加载下一页</string>

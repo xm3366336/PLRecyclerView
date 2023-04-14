@@ -12,6 +12,7 @@ import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;
 import com.pengl.demo.utils.BaseActivity;
+import com.pengl.recyclerview.PLLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ErrorActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mAdapter = new AdapterNormal();
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mRecycler.setLayoutManager(new PLLinearLayoutManager(this));
         mRecycler.setAdapterWithLoading(mAdapter);
         mRecycler.setRefreshListener(() -> getData(true));
 

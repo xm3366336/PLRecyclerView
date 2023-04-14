@@ -14,6 +14,7 @@
     <string name="title_activity_manual_load_more">ManualLoadMoreActivity</string>
     <string name="title_activity_expand">ExpandActivity</string>
     <string name="title_activity_item_drag">ItemDragActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
     <string-array name="main_fun_name">
         <item>EmptyActivity</item>
@@ -25,6 +26,7 @@
         <item>ManualLoadMoreActivity</item>
         <item>DragActivity</item>
         <item>ExpandActivity</item>
+        <item>TestActivity</item>
     </string-array>
 
     <string name="click_to_load">Click to load the next page</string>
