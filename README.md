@@ -6,7 +6,7 @@
 > 1、使用
 
 ```
-implementation 'com.github.xm3366336:PLRecyclerView:2.0.4'
+implementation 'com.github.xm3366336:PLRecyclerView:2.1.0'
 ```
 
 > 2、Demo下载
@@ -15,9 +15,9 @@ implementation 'com.github.xm3366336:PLRecyclerView:2.0.4'
 
 > 3、更新日志
 
-## Update 20230414
+## Update 20230415
 
-1. 升级gradle；
+1. 升级gradle8.0；
 2. 新增adapter.addFooterSpace(int height)，方便底部加个空的高度。
 
 ## Update 20220412
