@@ -1,5 +1,6 @@
 package com.pengl.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;

@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-group = 'com.github.xm3366336'
-
 android {
     namespace 'com.pengl.recyclerview'
     compileSdkVersion rootProject.compileSdkVersion
@@ -29,4 +27,16 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId 'com.github.xm3366336'
+                artifactId 'PLRecyclerView'
+                version '2.0.4'
+            }
+        }
+    }
 }
