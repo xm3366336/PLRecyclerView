@@ -9,11 +9,7 @@
 implementation 'com.github.xm3366336:PLRecyclerView:2.1.0'
 ```
 
-> 2、Demo下载
-
-* [Google Play](https://play.google.com/store/apps/details?id=com.pengl.PLRecyclerView.demo)
-
-> 3、更新日志
+> 2、更新日志
 
 ## Update 20230415
 

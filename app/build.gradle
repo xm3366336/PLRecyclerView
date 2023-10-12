@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 
 android {
     namespace 'com.pengl.demo'
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion = rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "com.pengl.PLRecyclerView.demo"
@@ -32,7 +32,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.annotation:annotation:1.4.0'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.annotation:annotation:1.7.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
 }
