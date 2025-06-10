@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 /**
  *
  */
@@ -66,7 +68,26 @@ public class TouchHelperDragCallback extends ItemTouchHelper.Callback {
                 || !mAdapter.canDrag(target.getBindingAdapterPosition())) {
             return true;
         }
-        mAdapter.swap(viewHolder.getBindingAdapterPosition(), target.getBindingAdapterPosition());
+
+        int fromPosition = viewHolder.getBindingAdapterPosition();
+        int toPosition = target.getBindingAdapterPosition();
+
+        List<Object> data = (List<Object>) mAdapter.getData();
+        if (data == null || data.isEmpty()) {
+            return true;
+        }
+
+        // 保存要移动的项目
+        Object item = data.get(fromPosition);
+
+        // 移除原位置的项目
+        data.remove(fromPosition);
+
+        // 在目标位置插入项目
+        data.add(toPosition, item);
+
+        // 通知适配器数据已更新
+        mAdapter.notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
