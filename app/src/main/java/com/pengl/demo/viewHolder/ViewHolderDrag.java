@@ -18,9 +18,9 @@ import com.pengl.demo.model.BeanDrag;
  */
 public class ViewHolderDrag extends AbstractViewHolder<BeanDrag> implements View.OnClickListener {
 
-    private TextView mText;
-    private ImageView mReorder;
-    private Context mContext;
+    private final TextView mText;
+    private final ImageView mReorder;
+    private final Context mContext;
 
     @SuppressLint("ClickableViewAccessibility")
     public ViewHolderDrag(ViewGroup parent) {

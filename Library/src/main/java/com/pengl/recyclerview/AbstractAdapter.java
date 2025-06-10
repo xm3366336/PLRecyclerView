@@ -87,7 +87,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
             dataSet.notifyEmpty(0, null);
         } else {
             dataSet.notifyContent();
-            if (data.size() == 0) {
+            if (data.isEmpty()) {
                 dataSet.notifyNoMore();
             }
         }
@@ -417,8 +417,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
 
         // 瀑布流的 Header Footer 宽度处理
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-        if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
-            StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+        if (lp instanceof StaggeredGridLayoutManager.LayoutParams p) {
             if (!dataSet.data.is(position)) {
                 p.setFullSpan(true);
             }
@@ -446,8 +445,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
 
         // Grid的 Header Footer 宽度处理
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+        if (manager instanceof GridLayoutManager gridManager) {
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {

@@ -16,10 +16,6 @@ import com.pengl.demo.utils.ItemTouchHelperProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-
 public class DragActivity extends BaseActivity {
 
     private boolean flag = false;
