@@ -1,6 +1,7 @@
 package com.pengl.demo.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -52,9 +53,9 @@ public class DragActivity extends BaseActivity {
             List<BeanDrag> copy = mAdapter.getData();
             for (BeanDrag each : copy) {
                 each.setStatus(!each.isStatus());
+                Log.d("info", "-----> " + each.getText());
             }
             mAdapter.notifyDataSetChanged();
-
             return true;
         } else if (id == R.id.action_grid) {
             gridChecked = !item.isChecked();
