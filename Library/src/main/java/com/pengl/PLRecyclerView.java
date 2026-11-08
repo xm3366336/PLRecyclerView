@@ -20,10 +20,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.pengl.recyclerview.AbstractAdapter;
 import com.pengl.recyclerview.Bridge;
 import com.pengl.recyclerview.Configure;
+import com.pengl.recyclerview.DataSetObserver;
 import com.pengl.recyclerview.R;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public class PLRecyclerView extends FrameLayout {
 
@@ -55,7 +53,8 @@ public class PLRecyclerView extends FrameLayout {
     private boolean loadMoreFailed = false;
 
     private final OnScrollListener mScrollListener = new OnScrollListener();
-    private final DataSetObserver mObserver = new DataSetObserver();
+    private final DataSetObserverImpl mObserver = new DataSetObserverImpl();
+    private AbstractAdapter<?, ?> mSubscribedAdapter;
 
     public PLRecyclerView(Context context) {
         this(context, null);
@@ -345,7 +344,15 @@ public class PLRecyclerView extends FrameLayout {
     }
 
     private void subscribeWithAdapter(AbstractAdapter<?, ?> adapter) {
+        if (mSubscribedAdapter == adapter) {
+            // 同一个 Adapter 重复设置时，避免重复注册观察器导致事件被多次分发
+            return;
+        }
+        if (null != mSubscribedAdapter) {
+            mSubscribedAdapter.unregisterObserver(mObserver);
+        }
         adapter.registerObserver(mObserver);
+        mSubscribedAdapter = adapter;
     }
 
     public interface OnRefreshListener {
@@ -356,14 +363,13 @@ public class PLRecyclerView extends FrameLayout {
         void onLoadMore();
     }
 
-    private class DataSetObserver implements Observer {
+    private class DataSetObserverImpl implements DataSetObserver {
 
         @Override
-        public void update(Observable o, Object arg) {
+        public void onDataSetChanged(@NonNull Bridge bridge) {
             closeRefreshing();
             closeLoadingMore();
-            Bridge type = (Bridge) arg;
-            type.doSomething(PLRecyclerView.this);
+            bridge.doSomething(PLRecyclerView.this);
         }
     }
 

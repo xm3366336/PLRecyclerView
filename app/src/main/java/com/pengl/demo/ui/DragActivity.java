@@ -55,7 +55,8 @@ public class DragActivity extends BaseActivity {
                 each.setStatus(!each.isStatus());
                 Log.d("info", "-----> " + each.getText());
             }
-            mAdapter.notifyDataSetChanged();
+            // 拖动图标的显示状态发生了变化，item 数量与位置不变，只需重新绑定可见项
+            mAdapter.notifyItemsChanged();
             return true;
         } else if (id == R.id.action_grid) {
             gridChecked = !item.isChecked();

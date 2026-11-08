@@ -1,6 +1,5 @@
 package com.pengl.recyclerview;
 
-import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -30,24 +29,51 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         dataSet = new DataSetObservable<>();
     }
 
+    /**
+     * 清空 Header、Data、Footer，并刷新列表。
+     * <p>
+     * Extra（LoadMoreView 等）不受影响。
+     */
     public void clear() {
-        dataSet.clear();
-        notifyDataSetChanged();
+        clearDataSet();
     }
 
+    /**
+     * 清空数据（Header、Footer 不受影响），并刷新列表。
+     */
     public void clearData() {
+        int removed = dataSet.data.size();
+        if (removed <= 0) {
+            return;
+        }
+        int start = dataSet.header.size();
         dataSet.data.clear();
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(start, removed);
     }
 
+    /**
+     * 清空 Header，并刷新列表。
+     */
     public void clearHeader() {
+        int removed = dataSet.header.size();
+        if (removed <= 0) {
+            return;
+        }
         dataSet.header.clear();
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(0, removed);
     }
 
+    /**
+     * 清空 Footer，并刷新列表。
+     */
     public void clearFooter() {
+        int removed = dataSet.footer.size();
+        if (removed <= 0) {
+            return;
+        }
+        int start = dataSet.header.size() + dataSet.data.size();
         dataSet.footer.clear();
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(start, removed);
     }
 
     /**
@@ -56,9 +82,12 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param item item
      */
     public void add(T item) {
+        if (null == item) {
+            return;
+        }
         dataSet.data.add(item);
+        notifyItemInserted(dataSet.header.size() + dataSet.data.size() - 1);
         dataSet.notifyContent();
-        notifyDataSetChanged();
     }
 
     /**
@@ -74,13 +103,12 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         }
 
         int oldSize = dataSet.data.size();
-        if (oldSize > 0) {
+        int headerSize = dataSet.header.size();
+
+        if (!data.isEmpty()) {
             dataSet.data.addAll(data);
-            notifyItemRangeInserted(oldSize, data.size());
-        } else {
-            dataSet.data.clear();
-            dataSet.data.addAll(data);
-            notifyDataSetChanged();
+            // 数据位于 Header 之后，插入位置需要加上 Header 的偏移量
+            notifyItemRangeInserted(headerSize + oldSize, data.size());
         }
 
         if (dataSet.totalSize() == 0) {
@@ -93,12 +121,30 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         }
     }
 
+    /**
+     * 添加 Header，并刷新列表。
+     *
+     * @param header header
+     */
     public void addHeader(SectionItem header) {
+        if (null == header) {
+            return;
+        }
         dataSet.header.add(header);
+        notifyItemInserted(dataSet.header.size() - 1);
     }
 
+    /**
+     * 添加 Footer，并刷新列表。
+     *
+     * @param footer footer
+     */
     public void addFooter(SectionItem footer) {
+        if (null == footer) {
+            return;
+        }
         dataSet.footer.add(footer);
+        notifyItemInserted(dataSet.header.size() + dataSet.data.size() + dataSet.footer.size() - 1);
     }
 
     /**
@@ -107,7 +153,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param height 高度
      */
     public void addFooterSpace(int height) {
-        dataSet.footer.add(new SectionItem() {
+        addFooter(new SectionItem() {
             @Override
             public View createView(ViewGroup parent) {
                 Space space = new Space(mRecyclerView.getContext());
@@ -128,12 +174,20 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param item            插入的数据
      */
     public void insert(int adapterPosition, T item) {
-        if (dataSet.data.size() <= adapterPosition) {
-            add(item);
-        } else {
-            dataSet.data.insert(adapterPosition, item);
-            notifyItemInserted(adapterPosition);
+        if (null == item) {
+            return;
         }
+        if (dataSet.data.size() <= adapterPosition) {
+            // 位置越界，退化为追加，保持原有行为
+            add(item);
+            return;
+        }
+        int index = dataSet.data.insert(adapterPosition, item);
+        if (index < 0) {
+            // 数据未发生变化，不通知 RecyclerView，避免状态不一致
+            return;
+        }
+        notifyItemInserted(index);
     }
 
     /**
@@ -143,12 +197,20 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param items           插入的数据
      */
     public void insertAll(int adapterPosition, List<? extends T> items) {
-        if (dataSet.data.size() <= adapterPosition) {
-            addAll(items);
-        } else {
-            dataSet.data.insertAll(adapterPosition, items);
-            notifyItemRangeInserted(adapterPosition, items.size());
+        if (null == items || items.isEmpty()) {
+            return;
         }
+        if (dataSet.data.size() <= adapterPosition) {
+            // 位置越界，退化为追加，保持原有行为
+            addAll(items);
+            return;
+        }
+        int index = dataSet.data.insertAll(adapterPosition, items);
+        if (index < 0) {
+            // 数据未发生变化，不通知 RecyclerView，避免状态不一致
+            return;
+        }
+        notifyItemRangeInserted(index, items.size());
     }
 
     /**
@@ -158,27 +220,43 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param item            插入的数据
      */
     public void insertBack(int adapterPosition, T item) {
-        if (dataSet.data.size() <= adapterPosition) {
-            add(item);
-        } else {
-            dataSet.data.insertBack(adapterPosition, item);
-            notifyItemInserted(adapterPosition + 1);
+        if (null == item) {
+            return;
         }
+        if (dataSet.data.size() <= adapterPosition) {
+            // 位置越界，退化为追加，保持原有行为
+            add(item);
+            return;
+        }
+        int index = dataSet.data.insertBack(adapterPosition, item);
+        if (index < 0) {
+            // 数据未发生变化，不通知 RecyclerView，避免状态不一致
+            return;
+        }
+        notifyItemInserted(index);
     }
 
     /**
      * 插入多项数据到position之后
      *
-     * @param adapterPosition 插入的位置
+     * @param adapterPosition position 从0开始，含header的条数
      * @param items           插入的数据
      */
     public void insertAllBack(int adapterPosition, List<? extends T> items) {
-        dataSet.data.insertAllBack(adapterPosition, items);
-        notifyItemRangeInserted(adapterPosition + 1, items.size());
+        if (null == items || items.isEmpty()) {
+            return;
+        }
+        int index = dataSet.data.insertAllBack(adapterPosition, items);
+        if (index < 0) {
+            return;
+        }
+        notifyItemRangeInserted(index, items.size());
     }
 
     public void swap(int fromAdapterPosition, int toAdapterPosition) {
-        dataSet.data.swap(fromAdapterPosition, toAdapterPosition);
+        if (!dataSet.data.swap(fromAdapterPosition, toAdapterPosition)) {
+            return;
+        }
         notifyItemMoved(fromAdapterPosition, toAdapterPosition);
     }
 
@@ -188,11 +266,11 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param adapterPosition 待删除的位置 从0开始，含header的条数
      */
     public void remove(int adapterPosition) {
-        if (dataSet.data.size() < adapterPosition) {
+        int index = dataSet.data.remove(adapterPosition);
+        if (index < 0) {
             return;
         }
-        dataSet.data.remove(adapterPosition);
-        notifyItemRemoved(adapterPosition);
+        notifyItemRemoved(index);
     }
 
     /**
@@ -203,14 +281,37 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param removeSize      删除的数据大小
      */
     public void removeBack(int adapterPosition, int removeSize) {
+        if (removeSize <= 0) {
+            return;
+        }
         if (dataSet.data.size() <= adapterPosition) {
             return;
         }
         if (dataSet.data.size() <= adapterPosition + removeSize) {
             return;
         }
-        dataSet.data.removeAllBack(adapterPosition, removeSize);
-        notifyItemRangeRemoved(adapterPosition + 1, removeSize);
+        int index = dataSet.data.removeAllBack(adapterPosition, removeSize);
+        if (index < 0) {
+            return;
+        }
+        notifyItemRangeRemoved(index, removeSize);
+    }
+
+    /**
+     * 通知数据内容发生了变化（重新绑定数据区域的 item）。
+     * <p>
+     * 当只是数据内容改变（例如修改了某个字段），而 item 的数量与位置没有变化时，
+     * 使用该方法代替 {@link #notifyDataSetChanged()}，避免整屏刷新带来的卡顿。
+     * <p>
+     * 仅数据区（Data）会被重新绑定，Header / Footer / Extra 保持不变。
+     */
+    public void notifyItemsChanged() {
+        int dataSize = dataSet.data.size();
+        if (dataSize <= 0) {
+            return;
+        }
+        int start = dataSet.header.size();
+        notifyItemRangeChanged(start, dataSize);
     }
 
     public T get(int position) {
@@ -267,6 +368,11 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         return dataSet.header.size();
     }
 
+    /**
+     * 获取Footer的个数
+     *
+     * @return footer size
+     */
     public int getFooterSize() {
         return dataSet.footer.size();
     }
@@ -309,7 +415,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * 清除当前所有数据，并显示Empty
      */
     public void showEmpty(int resId, String content) {
-        dataSet.clear();
+        clearDataSet();
         dataSet.notifyEmpty(resId, content);
     }
 
@@ -336,7 +442,7 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
      * @param error 显示具体的错误原因
      */
     public void showError(int resId, String error) {
-        dataSet.clear();
+        clearDataSet();
         dataSet.notifyError(resId, error);
     }
 
@@ -490,13 +596,76 @@ public abstract class AbstractAdapter<T extends ItemType, VH extends AbstractVie
         }
     }
 
-    public void registerObserver(Observer observer) {
+    /**
+     * 注册数据集观察者
+     *
+     * @param observer observer
+     */
+    public void registerObserver(DataSetObserver observer) {
         dataSet.addObserver(observer);
+    }
+
+    /**
+     * 注销数据集观察者
+     *
+     * @param observer observer
+     */
+    public void unregisterObserver(DataSetObserver observer) {
+        dataSet.removeObserver(observer);
+    }
+
+    /**
+     * 注册旧版观察者（{@link java.util.Observer}）
+     * <p>
+     * 为兼容旧版本而保留，{@link java.util.Observer} 已被废弃。
+     *
+     * @param observer observer
+     * @deprecated 请使用 {@link #registerObserver(DataSetObserver)}
+     */
+    @Deprecated
+    @SuppressWarnings("deprecation")
+    public void registerObserver(Observer observer) {
+        if (null == observer) {
+            return;
+        }
+        dataSet.addObserver(new LegacyObserver(observer));
+    }
+
+    /**
+     * 注销旧版观察者（{@link java.util.Observer}）
+     * <p>
+     * 为兼容旧版本而保留，{@link java.util.Observer} 已被废弃。
+     * <p>
+     * 注意：旧版观察者被 {@link LegacyObserver} 包装后无法再被精确移除，
+     * 该方法仅用于兼容旧代码，实际不会移除已注册的旧版观察者。
+     *
+     * @param observer observer
+     * @deprecated 请使用 {@link #unregisterObserver(DataSetObserver)}
+     */
+    @Deprecated
+    @SuppressWarnings("deprecation")
+    public void unregisterObserver(Observer observer) {
+        // 旧版观察者无法精确移除，此处保留空实现以兼容旧代码
     }
 
     protected abstract VH onNewCreateViewHolder(ViewGroup parent, int viewType);
 
     protected abstract void onNewBindViewHolder(VH holder, int position);
+
+    /**
+     * 清空 Header、Data、Footer，并通知 RecyclerView 移除对应的 item。
+     * <p>
+     * 这里不触发 Empty 状态，仅做数据清理。
+     */
+    private void clearDataSet() {
+        int oldSize = dataSet.totalSize();
+        dataSet.clear();
+        int removed = oldSize - dataSet.totalSize();
+        if (removed > 0) {
+            // Header / Data / Footer 均位于 Extra 之前，因此被移除的一定是前 removed 个
+            notifyItemRangeRemoved(0, removed);
+        }
+    }
 
     private void loadMore() {
         new Handler(Looper.getMainLooper()).post(dataSet::notifyAutoLoadMore);
