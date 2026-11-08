@@ -13,14 +13,13 @@ import com.pengl.recyclerview.AbstractViewHolder;
 import com.pengl.recyclerview.PLLinearLayoutManager;
 import com.pengl.demo.R;
 import com.pengl.demo.model.BeanMainFun;
+import com.pengl.demo.utils.BaseActivity;
 import com.pengl.demo.viewHolder.ViewFooter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private final Class<?>[] ARRAY_CLASS = new Class<?>[]{//
             EmptyActivity.class,//
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recyclerview);
 
         MainAdapter mAdapter = new MainAdapter();
 

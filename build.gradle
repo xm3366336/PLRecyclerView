@@ -4,17 +4,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.9.1'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.android.tools.build:gradle:9.5.1'
     }
 }
 
 ext {
-    compileSdkVersion = 35
-    minSdkVersion = 21
-    targetSdkVersion = 35
-    versionCode = 2506101
-    versionName = "2.2.0"
+    compileSdkVersion = 37
+    minSdkVersion = 24
+    targetSdkVersion = 37
+    versionCode = 2611081
+    versionName = "2.3.0"
 }
 
 allprojects {
@@ -27,4 +26,3 @@ allprojects {
 tasks.register('clean', Delete) {
     delete rootProject.layout.buildDirectory
 }
-

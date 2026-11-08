@@ -13,22 +13,20 @@ import com.pengl.recyclerview.ConfigureAdapter;
 import com.pengl.demo.R;
 import com.pengl.demo.adapter.AdapterNormal;
 import com.pengl.demo.model.BeanNormal;
+import com.pengl.demo.utils.BaseActivity;
 import com.pengl.demo.viewHolder.ViewHeader;
 import com.pengl.recyclerview.PLLinearLayoutManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  *
  */
-public class ManualLoadMoreActivity extends AppCompatActivity {
+public class ManualLoadMoreActivity extends BaseActivity {
 
     private AdapterNormal mAdapter;
     private final MyHandler mHandler = new MyHandler(this);
@@ -39,10 +37,13 @@ public class ManualLoadMoreActivity extends AppCompatActivity {
     private int pageNum;    // 当前页码
 
     @Override
+    protected int getContentLayout() {
+        return R.layout.activity_manual_load;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual_load);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         PLRecyclerView mRecycler = findViewById(R.id.recycler);
         mRecycler.setAutoLoadEnable(false);// 关闭自动加载更多, 改为手动触发

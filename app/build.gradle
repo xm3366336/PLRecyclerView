@@ -2,27 +2,31 @@ apply plugin: 'com.android.application'
 apply plugin: 'maven-publish'
 
 android {
-    namespace 'com.pengl.demo'
-    compileSdkVersion = rootProject.compileSdkVersion
+    namespace = 'com.pengl.demo'
+    compileSdk = rootProject.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.pengl.PLRecyclerView.demo"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        applicationId = "com.pengl.PLRecyclerView.demo"
+        minSdk = rootProject.minSdkVersion
+        targetSdk = rootProject.targetSdkVersion
+        versionCode = rootProject.versionCode
+        versionName = rootProject.versionName
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -30,9 +34,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':Library')
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.annotation:annotation:1.9.1'
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.annotation:annotation:1.11.0'
+    implementation 'com.google.android.material:material:1.14.0'
 
 }
